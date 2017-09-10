@@ -1,0 +1,98 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a [routerLink]="['/events']" class="btn btn-white btn-sm btn-list">{{ 'nav.events.list' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInit">
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="form">
+          <div class="ibox">
+            <div class="ibox-content">
+              <div class="row m-t-md form-horizontal">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'event.title' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="title" formControlName="title">
+                      <span class="help-block">{{ 'event.required' | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'event.location' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="location" formControlName="location">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'event.address' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="address" formControlName="address">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'event.date' | translate }}</label>
+                    <div class="col-md-8">
+                      <p-calendar formControlName="start_date" dateFormat="dd/mm/yy" (onSelect)="convertDate($event, 'start_date')" utc="true"></p-calendar>
+                      <span>To</span>
+                      <p-calendar formControlName="end_date" dateFormat="dd/mm/yy" (onSelect)="convertDate($event, 'end_date')" utc="true"></p-calendar>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'event.organizer' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="organizer" formControlName="organizer">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'event.members' | translate }}</label>
+                    <div class="col-md-8">
+                      <p-autoComplete formControlName="users"
+                                      [suggestions]="metadata.completedUsers"
+                                      field="fullname"
+                                      (completeMethod)="searchUser($event)"
+                                      [multiple]="true"
+                                      (onSelect)="setMemberData($event)"
+                                      (onUnselect)="setMemberData($event, false)">>
+                        <ng-template let-item pTemplate="item">
+                            <div>
+                              <img src="{{ '' | image:'user'}}" class="img-circle avatar-sm"/>
+                              <span>{{item.fullname}}</span>
+                            </div>
+                        </ng-template>
+                      </p-autoComplete>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'event.description' | translate }}</label>
+                    <div class="col-md-8">
+                      <textarea class="form-control input-md" rows="5" name="description" formControlName="description"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="widget-action-bottom">
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <!-- <button type="button" class="btn btn-default btn-reset">{{ 'action.reset' | translate }}</button> -->
+          <button type="button"
+            class="btn btn-primary btn-submit"
+            name="submit"
+            (click)="onSubmit()"
+            [disabled]="!form.valid || isProcessing">
+            {{ 'action.submit' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

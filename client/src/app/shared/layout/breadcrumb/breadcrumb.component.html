@@ -1,0 +1,40 @@
+<div class="col-sm-8">
+  <h2>{{ 'nav.' + pageTitle | translate }}</h2>
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']">{{ 'nav.home' | translate }}</a></li>
+    <ng-template ngFor let-breadcrumb [ngForOf]="breadcrumbs" let-last="last">
+      <ng-template [ngIf]="!last">
+        <li>
+          <span *ngIf="breadcrumb?.isMod">
+            <ng-template [ngIf]="breadcrumb?.isDetail && itemName">
+              <span class="item-detail">{{itemName}}</span>
+            </ng-template>
+            <ng-template [ngIf]="!(breadcrumb?.isDetail && itemName)">
+              {{ 'nav.' + breadcrumb?.label | translate }}
+            </ng-template>
+          </span>
+          <a *ngIf="!breadcrumb?.isMod" [routerLink]="[breadcrumb?.url]">
+            <ng-template [ngIf]="breadcrumb?.isDetail && itemName">
+              <span class="item-detail">{{itemName}}</span>
+            </ng-template>
+            <ng-template [ngIf]="!(breadcrumb?.isDetail && itemName)">
+              {{ 'nav.' + breadcrumb?.label | translate }}
+            </ng-template>
+          </a>
+        </li>
+      </ng-template>
+      <ng-template [ngIf]="last">
+        <li class="active">
+          <strong>
+            <ng-template [ngIf]="breadcrumb?.isDetail && itemName">
+              <span class="item-detail">{{itemName}}</span>
+            </ng-template>
+            <ng-template [ngIf]="!(breadcrumb?.isDetail && itemName)">
+              {{ 'nav.' + breadcrumb?.label | translate }}
+            </ng-template>
+          </strong>
+        </li>
+      </ng-template>
+    </ng-template>
+  </ol>
+</div>

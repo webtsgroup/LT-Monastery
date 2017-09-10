@@ -1,0 +1,81 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a [routerLink]="['/administrators']" class="btn btn-white btn-sm btn-list">{{ 'nav.administrators.list' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInit">
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="form">
+          <div class="ibox">
+            <div class="ibox-content">
+              <div class="row m-t-md form-horizontal">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'administrator.role' | translate }}</label>
+                    <div class="col-md-8">
+                      <div class="m-l-lg">
+                        <div class="radio" *ngFor="let item of metadata.roles">
+                          <input type="radio" id="{{item.code}}" [value]="item.id" formControlName="role_id">
+                          <label [attr.for]="item.code">{{item.name}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'administrator.username' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="username" formControlName="username">
+                      <span class="help-block">{{ 'administrator.required' | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="hidden" class="form-control input-md" name="abc">
+                    <label for="name" class="col-md-3 control-label required">{{ 'administrator.fullname' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="fullname" formControlName="fullname">
+                      <span class="help-block">{{ 'administrator.required' | translate }}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="!itemId" class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'administrator.password' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="hidden" class="form-control input-md" name="xyz">
+                      <input type="password" class="form-control input-md" name="password" formControlName="password">
+                      <span class="help-block">{{ 'administrator.error_password' | translate }}</span>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'administrator.repassword' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="password" class="form-control input-md" name="repassword" formControlName="repassword">
+                      <span class="help-block">{{ 'administrator.error_rerequired' | translate }}</span>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="widget-action-bottom">
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <!-- <button type="button" class="btn btn-default btn-reset">{{ 'action.reset' | translate }}</button> -->
+          <button type="button"
+            class="btn btn-primary btn-submit"
+            name="submit"
+            (click)="onSubmit()"
+            [disabled]="!form.valid || isProcessing">
+            {{ 'action.submit' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

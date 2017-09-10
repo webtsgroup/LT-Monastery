@@ -1,0 +1,39 @@
+.ui-dropdown {
+  @extend .form-control;
+  width: inherit !important;
+  &:not(.ui-state-disabled) {
+    &:hover {
+      color: inherit;
+      background-color: transparent;
+    }
+  }
+  .ui-dropdown-filter-container {
+    width: 100%;
+    .fa-search {
+      top: 12px;
+    }
+  }
+  .ui-dropdown-items {
+    @include ui-container();
+  }
+  &.ui-state-focus {
+    box-shadow: none;
+    border-color: $navy;
+  }
+  .ui-dropdown-label {
+    @include ui-label-padding();
+  }
+  .ui-dropdown-panel {
+    .ui-dropdown-item {
+      @include ui-state-item();
+      &:not(.ui-state-highlight) {
+        &:hover {
+          color: inherit;
+        }
+      }
+    }
+  }
+  .ui-dropdown-trigger {
+    @include ui-icon();
+  }
+}

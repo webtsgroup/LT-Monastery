@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "administrators": {
+      "detail": "Thông tin chi tiết",
+      "list": "Quản trị viên",
+      "management": "Quản trị viên",
+      "module": "Quản trị viên",
+      "new": "Thêm Quản trị viên",
+      "update": "Thay đổi thông tin"
+    },
+    "home": "Home",
+    "events": {
+      "detail": "Thông tin chi tiết",
+      "list": "Các sự kiện",
+      "management": "Quản lý sự kiện",
+      "module": "Quản lý sự kiện",
+      "new": "Thêm sự kiện",
+      "update": "Thay đổi thông tin"
+    },
+    "dashboard": "Thống kê",
+    "users": {
+      "internal": {
+        "detail": "Thông tin Tu sĩ",
+        "list": "Danh sách Tu sĩ",
+        "management": "Quản lý Tu sĩ",
+        "module": "Quản lý Tu sĩ",
+        "new": "Thêm Tu sĩ",
+        "update": "Thay đổi thông tin"
+      },
+      "external": {
+        "detail": "Thông tin chi tiết",
+        "list": "Danh sách Thành viên",
+        "management": "Quản lý Thành viên",
+        "module": "Quản lý Thành viên",
+        "new": "Thêm Thành viên",
+        "update": "Thay đổi thông tin"
+      }
+    },
+    "wiki": "Wiki"
+  }
+}

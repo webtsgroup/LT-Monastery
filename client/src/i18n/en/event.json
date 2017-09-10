@@ -1,0 +1,14 @@
+{
+  "event": {
+    "action": "Thao tác",
+    "address": "Địa chỉ",
+    "date": "Thời gian",
+    "description": "Mô tả thêm",
+    "end_date": "Ngày kết thúc",
+    "location": "Địa điểm",
+    "members": "Thành viên tham gia",
+    "organizer": "Ban tổ chức",
+    "start_date": "Ngày bắt đầu",
+    "title": "Tên sự kiện"
+  }
+}

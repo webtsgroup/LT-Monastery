@@ -1,0 +1,28 @@
+.ui-growl-item-container {
+  border-radius: 4px;
+  color: $white;
+  .ui-growl-message {
+    &:first-letter {
+      text-transform: capitalize;
+    }
+  }
+  &.ui-growl-message-info {
+    background: $navy;
+  }
+  &.ui-growl-message-error {
+    background: $red;
+  }
+  &.ui-growl-message-success {
+    background: $navy;
+  }
+  &.ui-growl-message-warn {
+    background: $yellow;
+  }
+  .ui-growl-message {
+    width: 232px;
+  }
+  .ui-growl-icon-close {
+    top: 8px;
+    right: 8px;
+  }
+}

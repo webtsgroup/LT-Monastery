@@ -1,0 +1,22 @@
+<div class="ibox-content">
+  <form class="m-t" #formLogin="ngForm" (ngSubmit)="onSubmit(formLogin)" novalidate>
+    <h2 class="font-bold">{{ 'site_name' | translate }}</h2>
+    <div class="row">
+      <p [loading]="!canAction" [inlineOptions]="{hasError: hasError}">
+        <ng-template [ngIf]="canAction">
+          Vui lòng đăng nhập
+        </ng-template>
+      </p>
+      <div class="col-md-12">
+        <div class="form-group">
+          <input type="email" class="form-control" name="username" placeholder="Username" ngModel required>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" placeholder="Password" ngModel required>
+        </div>
+        <button [disabled]="!formLogin.valid || !canAction" type="submit" class="btn btn-primary block full-width m-b">Login</button>
+        <!-- <a href="#"><small>Forgot Password</small></a> -->
+      </div>
+    </div>
+  </form>
+</div>

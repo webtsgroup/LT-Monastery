@@ -1,0 +1,89 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <button class="btn btn-sm btn-default">{{ 'team.add' | translate }}</button>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInit">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <div class="row m-b">
+              <div class="col-md-4">
+                <input #search type="text" pInputText placeholder="{{ 'team.filter_by_name' | translate }}" class="form-control">
+              </div>
+              <!-- <div class="col-md-5 m-b pull-right">
+                <button class="btn btn-sm btn-default btn-delete" [disabled]="!selectedItems.length">{{ 'action.delete' | translate }}</button>
+              </div> -->
+            </div>
+            <p-dataTable #table
+                         [value]="result"
+                         [rows]="20"
+                         [paginator]="true"
+                         [editable]="true"
+                         [globalFilter]="search"
+                         [(selection)]="selectedItems"
+                         scrollable="true"
+                         sortMode="multiple">
+              <p-column styleClass="col-cb" selectionMode="multiple"></p-column>
+              <p-column styleClass="col-sysid" field="id" header="{{ '
+              sysid' | translate }}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/organisation', 'teams', item.id]">{{item.id}}</a>
+                </ng-template>
+              </p-column>
+              <p-column styleClass="col-img" field="img">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/organisation', 'teams', item.id]">
+                    <img alt="image" class="img-circle avatar-sm" src="{{ item.avatar_url | image:'user' }}">
+                  </a>
+                </ng-template>
+              </p-column>
+              <p-column field="name" header="{{'team.name' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a class="item-name" [routerLink]="['/organisation', 'teams', item.id]">
+                    {{item.name}}
+                  </a>
+                </ng-template>
+              </p-column>
+              <p-column field="manager" header="{{'team.manager' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/organisation', 'teams', item.manager.id]">
+                    {{item.manager.text}}
+                  </a>
+                </ng-template>
+              </p-column>
+              <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'team.action' | translate }}">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/teams', item[col.field], 'update']" class="update"></a><button (click)="delete(item[col.field])" class="delete"></button>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="widget-action-bottom">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="btn-group btn-group-custom dropup">
+            <button [disabled]="!selectedItems.length" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              {{'team.selected_item' | translate:{'value': selectedItems.length} }}
+            </button>
+            <ul class="dropdown-menu box-delete">
+              <li>{{'team.confirm_delete' | translate:{'value': selectedItems.length} }}</li>
+              <li class="text-right m-t">
+                <button class="btn btn-default btn-sm">{{ 'action.cancel' | translate }}</button>
+                <button class="btn btn-default btn-sm">{{ 'action.delete' | translate }}</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

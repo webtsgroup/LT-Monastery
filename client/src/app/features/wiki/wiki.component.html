@@ -1,0 +1,20 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a routerLink="" class="btn btn-white btn-sm">This is action area</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInitialing" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInitialing">
+    <div class="middle-box text-center animated fadeInRightBig">
+      <h3 class="font-bold">This is page content</h3>
+      <div class="error-desc">
+        You can create here any grid layout you want. And any variation layout you imagine:) Check out
+        main dashboard and other site. It use many different layout.
+        <br/><a routerLink="/" class="btn btn-white m-t">Dashboard</a>
+      </div>
+    </div>
+  </ng-template>
+</div>

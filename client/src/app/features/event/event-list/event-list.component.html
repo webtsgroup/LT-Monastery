@@ -1,0 +1,87 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a class="btn btn-sm btn-default" [routerLink]="['/events', 'new']">{{ 'nav.events.new' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInit">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <!-- <div class="row m-b">
+              <div class="col-md-4">
+                <input #search type="text" pInputText placeholder="{{ 'event.filter_by_name' | translate }}" class="form-control">
+              </div>
+              <div class="col-md-5 m-b pull-right">
+                <button class="btn btn-sm btn-default btn-delete" [disabled]="!selectedItems.length">{{ 'action.delete' | translate }}</button>
+              </div>
+            </div> -->
+            <p-dataTable #table
+                         [value]="result"
+                         [rows]="20"
+                         [paginator]="true"
+                         [editable]="true"
+                         [globalFilter]="search"
+                         [(selection)]="selectedItems"
+                         scrollable="true"
+                         sortMode="multiple">
+              <!-- <p-column styleClass="col-cb" selectionMode="multiple"></p-column> -->
+              <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/events', item.id]">{{item.id}}</a>
+                </ng-template>
+              </p-column>
+              <p-column field="title" header="{{'event.title' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a class="item-name" [routerLink]="['/events', item.id, 'update']">
+                    {{item.title}}
+                  </a>
+                </ng-template>
+              </p-column>
+              <p-column field="location" header="{{'event.location' | translate}}"></p-column>
+              <p-column field="address" header="{{'event.address' | translate}}"></p-column>
+              <p-column field="organizer" header="{{'event.organizer' | translate}}"></p-column>
+              <p-column field="start_date" header="{{'event.start_date' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <span>{{item.start_date * 1000 | date:"dd/MM/yyyy"}}</span>
+                </ng-template>
+              </p-column>
+              <p-column field="end_date" header="{{'event.end_date' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <span *ngIf="item.end_date">{{item.end_date * 1000 | date:"dd/MM/yyyy"}}</span>
+                </ng-template>
+              </p-column>
+              <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'event.action' | translate }}">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/events', item[col.field], 'update']" class="update"></a><button (click)="delete(item[col.field])" class="delete"></button>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="widget-action-bottom">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="btn-group btn-group-custom dropup">
+            <button [disabled]="!selectedItems.length" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              {{'event.selected_item' | translate:{'value': selectedItems.length} }}
+            </button>
+            <ul class="dropdown-menu box-delete">
+              <li>{{'event.confirm_delete' | translate:{'value': selectedItems.length} }}</li>
+              <li class="text-right m-t">
+                <button class="btn btn-default btn-sm">{{ 'action.cancel' | translate }}</button>
+                <button class="btn btn-default btn-sm">{{ 'action.delete' | translate }}</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </ng-template>
+</div>

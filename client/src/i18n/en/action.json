@@ -1,0 +1,9 @@
+{
+  "action": {
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "reset": "Làm lại",
+    "save": "Lưu",
+    "submit": "Submit"
+  }
+}

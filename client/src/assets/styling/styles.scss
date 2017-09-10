@@ -1,0 +1,15 @@
+@import "global";
+@import "partial";
+@import "component";
+@import "plugin";
+
+// Clear layout on print mode
+@media print {
+  nav.navbar-static-side {
+    display: none;
+  }
+
+  #page-wrapper {
+    margin: 0;
+  }
+}

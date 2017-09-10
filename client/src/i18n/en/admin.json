@@ -1,0 +1,8 @@
+{
+  "administrator": {
+    "fullname": "Tên hiển thị",
+    "password": "Mật khẩu",
+    "role": "Quyền",
+    "username": "Tên đăng nhập"
+  }
+}

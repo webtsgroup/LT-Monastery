@@ -1,0 +1,142 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb [itemName]="metadata?.user?.fullname"></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a [routerLink]="['/users', userType]" class="btn btn-white btn-sm">{{ 'nav.users.' + userType + '.list' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInit">
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="form">
+          <div class="ibox">
+            <div class="ibox-content">
+              <div class="row m-t-md form-horizontal">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'user.fullname' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="fullname" formControlName="fullname">
+                      <span class="help-block">{{ 'user.required' | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'user.code' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="code" formControlName="code">
+                      <span class="help-block">{{ 'user.required' | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.phone' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="phone" formControlName="phone">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.email' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="email" formControlName="email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.facebook' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="facebook" formControlName="facebook">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.birthday' | translate }}</label>
+                    <div class="col-md-8">
+                      <p-calendar formControlName="birthday"
+                                  dateFormat="dd/mm/yy"
+                                  monthNavigator="true"
+                                  yearNavigator="true"
+                                  yearRange="1900:2020"
+                                  (onSelect)="convertDate($event, 'birthday')"
+                                  utc="true"></p-calendar>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="upload" class="col-md-3 control-label">{{ 'user.avatar' | translate }}</label>
+                    <div class="col-md-8">
+                      <p-fileUpload name="demo[]" url="./upload.php"
+                                    (onUpload)="onUpload($event)"
+                                    multiple="multiple"
+                                    accept="image/*"
+                                    maxFileSize="1000000">
+                        <ng-template pTemplate type="content">
+                          <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                          </ul>
+                        </ng-template>
+                      </p-fileUpload>
+                    </div>
+                  </div> -->
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.job' | translate }}</label>
+                    <div class="col-md-8">
+                      <ng-select [items]="metadata.jobs"
+                                 [active]="metadata.selectedItem.job"
+                                 (selected)="setField($event, 'job_id')"
+                                 placeholder="{{ 'user.select_job' | translate }}">
+                      </ng-select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="decription" class="col-md-3 control-label">{{ 'user.barcode' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="barcode" formControlName="barcode">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'province' | translate }}</label>
+                    <div class="col-md-8">
+                      <ng-select [items]="metadata.provinces"
+                                 [active]="metadata.selectedItem.province"
+                                 (selected)="setField($event, 'province_id')"
+                                 placeholder="{{ 'select_province' | translate }}">
+                      </ng-select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'district' | translate }}</label>
+                    <div class="col-md-8">
+                      <ng-select [items]="metadata.completedDistricts"
+                                 [active]="metadata.selectedItem.district"
+                                 (selected)="setField($event, 'district_id')"
+                                 placeholder="{{ 'select_district' | translate }}">
+                      </ng-select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.address' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="address" formControlName="address">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="widget-action-bottom">
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <button type="button" class="btn btn-default btn-reset hidden">{{ 'action.reset' | translate }}</button>
+          <button type="button"
+            class="btn btn-primary btn-submit"
+            name="submit"
+            (click)="onSubmit()"
+            [disabled]="!form.valid || isProcessing">
+            {{ 'action.submit' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

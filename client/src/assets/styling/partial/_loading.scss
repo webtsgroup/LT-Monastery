@@ -1,0 +1,65 @@
+.loading-full {
+  width: 100%;
+  position: fixed;
+  cursor: default;
+  z-index: 99999999999;
+  .loader {
+    height: 4px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: $silver-bold;
+    &:before {
+      display: block;
+      position: absolute;
+      content: "";
+      left: -200px;
+      width: 200px;
+      height: 4px;
+      background-color: $primary;
+      animation: loading 2s linear infinite;
+    }
+    @keyframes loading {
+      from { left: -200px; width: 20%; }
+      30% { width: 30%; }
+      50% { width: 50%; }
+      70% { width: 70%; }
+      80% { left: 80%; }
+      95% { left: 90%; }
+      to { left: 100%; }
+    }
+  }
+  //material
+  .load-bar {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background-color: #fdba2c;
+    .bar {
+      content: "";
+      display: inline;
+      position: absolute;
+      width: 0;
+      height: 100%;
+      left: 50%;
+      text-align: center;
+      &:nth-child(1) {
+        background-color: #da4733;
+        animation: mloading 3s linear infinite;
+      }
+      &:nth-child(2) {
+        background-color: #3b78e7;
+        animation: mloading 3s linear 1s infinite;
+      }
+      &:nth-child(3) {
+        background-color: #fdba2c;
+        animation: mloading 3s linear 2s infinite;
+      }
+    }
+    @keyframes mloading {
+      from {left: 50%; width: 0;z-index:100;}
+      33.3333% {left: 0; width: 100%;z-index: 10;}
+      to {left: 0; width: 100%;}
+    }
+  }
+}

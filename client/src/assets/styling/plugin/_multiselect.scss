@@ -1,0 +1,73 @@
+.ui-multiselect {
+  @extend .form-control;
+  box-sizing: border-box;
+  background: $white;
+  height: 34px;
+  &:not(.ui-state-disabled) {
+    &:hover {
+      color: $text-color;
+      background: inherit;
+      border-color: $border-color;
+    }
+  }
+  .ui-multiselect-items-wrapper {
+    @include ui-container();
+  }
+  .ui-multiselect-label {
+    @include ui-label-padding();
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    &.ui-state-hover,
+    &.ui-state-focus,
+    :hover {
+      background-color: $white;
+    }
+  }
+  .ui-multiselect-trigger {
+    @include ui-icon();
+  }
+  .ui-multiselect-panel {
+    background: $white;
+    @include ui-container();
+    .ui-multiselect-header {
+      @include ui-state-item();
+      background: transparent;
+      border: 1px solid $border-color;
+      border-style: none none solid none;
+      .ui-multiselect-filter-container {
+        margin-right: 0;
+        width: calc(100% - 30px);
+        .ui-inputtext {
+          @extend .form-control;
+        }
+        .fa-fw {
+          left: inherit;
+          right: 4px;
+          top: 8px;
+        }
+      }
+      .ui-chkbox {
+        left: 8px;
+        top: 12px;
+      }
+      .ui-multiselect-close {
+        right: 8px;
+        color: $text-color;
+        display: none;
+      }
+    }
+    .ui-multiselect-item {
+      @include ui-state-item();
+      &:hover {
+        background-color: $gray;
+        color: inherit;
+      }
+      label {
+        font-weight: normal;
+        margin: 0;
+      }
+    }
+  }
+}

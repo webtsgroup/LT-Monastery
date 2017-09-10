@@ -1,0 +1,45 @@
+/* Style for data table*/
+.table {
+  .col-checkbox {
+    width: 50px;
+    max-width: 50px !important;
+  }
+  .col-action {
+    width: 100px;
+    max-width: 100px !important;
+  }
+  &.table-vm {
+    tr {
+      td {
+        vertical-align: middle;
+        .btn {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  &.vertical-top {
+    tr {
+      td {
+        vertical-align: top;
+      }
+    }
+  }
+  .col-inline {
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: nowrap;
+  }
+  .col-img {
+    width: 32px;
+    padding-right: 0px;
+  }
+  .col-employee {
+    .employee-info {
+      display: inline-block;
+      padding-left: 4px;
+      vertical-align: middle;
+    }
+  }
+}
+/* End Style for data tabler*/

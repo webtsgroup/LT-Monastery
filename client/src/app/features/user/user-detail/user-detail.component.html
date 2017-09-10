@@ -1,0 +1,91 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb [itemName]="detail?.fullname"></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a [routerLink]="['/users', userType, detail.id, 'update']" class="btn btn-white btn-sm btn-edit">
+        {{ 'nav.users.' + userType + '.update' | translate }}
+      </a>
+      <a [routerLink]="['/users', userType]" class="btn btn-white btn-sm btn-list">{{ 'nav.users.' + userType + '.list' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content page-detail">
+  <ng-template [ngIf]="!isInit">
+  	<div class="row">
+      <div class="col-md-8 col-left">
+        <div class="ibox">
+          <div class="ibox-content main-content">
+            <h2 class="m-b-lg">{{ 'user.activities' | translate }}</h2>
+            <div class="timeline-item" *ngFor="let event of detail.events">
+              <div class="row">
+                  <div class="col-xs-3 date">
+                      <i class="fa fa-calendar"></i>
+                      {{event.start_date * 1000 | date:'dd/MM/yyyy'}}
+                      <!-- <br>
+                      <small class="text-navy">2 hour ago</small> -->
+                  </div>
+                  <div class="col-xs-9 content no-top-border">
+                      <p class="m-b-xs"><strong>{{event.title}}</strong></p>
+
+                      <p>{{event.location}} - {{event.address}}</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-right">
+        <div class="section-top">
+          <img src="{{ detail.avatar_url | image:'user' }}" class="img-circle text-center" alt="avatar">
+          <h2 class="m-t-sm m-b-xs">{{detail.fullname}}</h2>
+        </div>
+        <div class="section-bottom  no-bg">
+          <div class="box-social text-center">
+            <a [href]="'mailto:' + detail.email" class="btn btn-default btn-circle email">
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            </a>
+            <a [href]="detail.facebook" class="btn btn-default btn-circle fb" target="_blank">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="small m-t-md m-l-sm">
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-birthday-cake"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.birthday">{{detail.birthday}}</span>
+              </div>
+            </div>
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-user"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.job">{{detail.job.name}}</span>
+              </div>
+            </div>
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-phone"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.phone">{{detail.phone}}</span>
+              </div>
+            </div>
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-phone"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.barcode">{{detail.barcode}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-md-1"><i class="fa fa-home"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.address">{{detail.address}}</span>
+                <br>
+                <span [emptyData]="detail.district">{{detail?.district?.name}}</span>
+                <br>
+                <span [emptyData]="detail?.province?.name">{{detail?.province?.name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

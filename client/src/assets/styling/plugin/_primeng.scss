@@ -1,0 +1,87 @@
+@mixin ui-label-padding() {
+  padding: 2px 0;
+}
+@mixin ui-container() {
+  padding: 0;
+}
+@mixin ui-state-item() {
+  margin: 0;
+  padding: 8px 12px;
+}
+@mixin ui-icon() {
+  color: $dark-gray;
+  right: 2px;
+  top: 4px;
+  padding: 0;
+  border: none;
+}
+@mixin ui-icon-search() {
+  left: inherit;
+  right: 4px;
+  top: 7px;
+}
+.ui-widget-header {
+  margin: 0;
+}
+.ui-widget-content,
+.ui-inputtext {
+  color: inherit;
+}
+.ui-shadow {
+  @include box-shadow(0, 0, 3px, $gray);
+  width: 100%;
+  box-sizing: border-box;
+}
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+  background-color: transparent;
+}
+.ui-state-default {
+  background-color: transparent;
+  .fa {
+    color: $dark-gray;
+    &.fa-search {
+      color: $dark-gray;
+    }
+  }
+}
+.ui-widget-content .ui-state-highlight {
+  color: inherit;
+  background-color: $gray;
+}
+.ui-state-highlight {
+  color: inherit;
+  background-color: $gray;
+}
+.ui-state-focus {
+  box-shadow: none !important;
+}
+.ui-inputtext {
+  @extend .form-control;
+  box-shadow: none;
+  font-weight: normal;
+  &.ui-state-default {
+    background: transparent;
+  }
+}
+.ui-chkbox {
+  .ui-chkbox-box {
+    width: 17px;
+    height: 17px;
+    background-color: $white;
+    border-radius: 1;
+  }
+  .ui-state-active {
+    color: $white;
+    background-color: $navy;
+    border-color: $navy;
+  }
+  .ui-chkbox-icon {
+    &.fa {
+      font-size: 11px;
+      padding-top: 2px;
+      color: $white;
+    }
+  }
+}

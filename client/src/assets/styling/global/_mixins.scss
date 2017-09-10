@@ -1,0 +1,44 @@
+/**********************************
+  three-dot
+**********************************/
+@mixin three-dot ($font-size , $line-height, $lines-to-show ) {
+  font-size: $font-size;
+  overflow: hidden;
+  position: relative;
+  line-height: $line-height;
+  max-height: $font-size * $line-height * $lines-to-show;
+  text-align: justify;
+  padding-right: $font-size;
+  &::before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    top: $font-size * $line-height * ( $lines-to-show - 1 );
+  }
+  &:hover {
+    &::before {
+      display: none;
+    }
+  }
+}
+
+@mixin avatar ($size) {
+  width: $size;
+  height: $size;
+  object-fit: cover;
+}
+
+@mixin timesheet-task ($percent) {
+  height: $percent * 20px;
+}
+
+@mixin truncate ($max-width) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: $max-width;
+}
+
+@mixin box-shadow ($top, $left, $blur, $color) {
+  box-shadow: $top $left $blur $color;
+}

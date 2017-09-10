@@ -1,0 +1,17 @@
+{
+  "user": {
+    "action": "Thao tác",
+    "activities": "Quá trình hoạt động",
+    "address": "Địa chỉ",
+    "avatar": "Avatar",
+    "barcode": "Barcode",
+    "birthday": "Sinh nhật",
+    "code": "ID",
+    "email": "Email",
+    "facebook": "Facebook",
+    "fullname": "Họ tên",
+    "job": "Nghề nghiệp",
+    "phone": "SDT",
+    "select_job": "Chọn Nghề nghiệp"
+  }
+}

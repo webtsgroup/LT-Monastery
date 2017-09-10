@@ -1,0 +1,102 @@
+.ui-datepicker-btn-hover {
+  top: 2px;
+  background: $gray;
+  border-radius: 4px;
+}
+.ui-datepicker-btn-icon {
+  position: absolute;
+  font-family: FontAwesome;
+  top: 4px;
+  color: $text-color;
+}
+.ui-calendar {
+  .ui-inputtext {
+    height: 34px;
+    &:focus {
+      border-color: $border-color !important;
+    }
+  }
+  &::before {
+    @extend .ui-datepicker-btn-icon;
+    content: "\f073";
+    font-size: 16px;
+    color: $suva-grey;
+    top: 6px;
+    right: 8px;
+  }
+}
+.ui-datepicker {
+  background: $white;
+  z-index: 2201 !important;
+  width: 280px;
+  &.ui-widget-content {
+    background: $white;
+    .ui-datepicker-calendar {
+      background: $white;
+      td {
+        border-bottom: none;
+        padding-top: 2px;
+        a {
+          margin: 0 1px;
+          border-radius: 3px;
+          font-size: 12px;
+          font-weight: normal;
+          text-align: center;
+        }
+      }
+      thead {
+        tr {
+          th {
+            background: $white;
+            color: $text-color;
+          }
+        }
+      }
+      .ui-state-default {
+        &.ui-state-active,
+        &.ui-state-hover {
+          background: $navy;
+          color: $white;
+          font-weight: initial;
+        }
+      }
+    }
+  }
+  .ui-datepicker-calendar {
+    background: $white;
+  }
+  .ui-datepicker-header {
+    background: $white;
+    border-bottom: 0;
+    .ui-datepicker-title {
+      text-transform: capitalize;
+      color: $text-color;
+    }
+    .ui-datepicker-next,
+    .ui-datepicker-prev {
+      border-radius: 3px;
+    }
+    .ui-datepicker-next {
+      &.ui-datepicker-next-hover {
+        @extend .ui-datepicker-btn-hover;
+        right: 2px;
+      }
+      &::after {
+        @extend .ui-datepicker-btn-icon;
+        content: "\f0da";
+        right: 8px;
+      }
+    }
+    .ui-datepicker-prev {
+      &.ui-datepicker-prev-hover {
+        @extend .ui-datepicker-btn-hover;
+        left: 2px;
+      }
+      &::before {
+        @extend .ui-datepicker-btn-icon;
+        content: "\f0d9";
+        right: 10px;
+      }
+    }
+  }
+}

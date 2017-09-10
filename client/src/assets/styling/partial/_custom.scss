@@ -1,0 +1,462 @@
+@media (min-width: 768px) {
+  #page-wrapper {
+    min-height: 800px;
+  }
+}
+/* clean outline */
+* {
+  outline: none !important;
+}
+
+/* full screen  */
+.full-screen {
+  width: 100%;
+  height: 100%;
+}
+.border-none {
+  border: none;
+}
+.clear-left {
+  clear: both;
+}
+.p-l-20 {
+  padding-left: 20px;
+}
+.none-resize {
+  resize : none;
+}
+
+/* Defining list button using icon font-awesome */
+.btn-add {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, add);
+  }
+}
+.btn-awesome {
+  font-family: 'FontAwesome';
+  -webkit-font-smoothing: antialiased;
+  padding-right: 4px;
+}
+.btn-back {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, back);
+  }
+}
+.btn-cancel {
+  &:before {
+    @extend .btn-awesome;
+    color: $red;
+    content: map-get($icon-fa, cancel);
+  }
+}
+.btn-close {
+  cursor: pointer;
+
+  &:hover {
+    color: $red;
+  }
+}
+.btn-delete {
+  color: $red;
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, remove);
+  }
+}
+.btn-edit {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, edit);
+  }
+}
+.btn-export {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, export);
+  }
+}
+.btn-list {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, list);
+  }
+}
+.btn-preview {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, preview);
+  }
+}
+.btn-reject {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, reject);
+  }
+}
+.btn-remove {
+  &:hover {
+    @extend .btn-danger;
+  }
+}
+.btn-reset {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, reset);
+  }
+}
+.btn-save {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, save);
+  }
+}
+.btn-send {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, send);
+  }
+}
+.btn-submit {
+  &:before {
+    @extend .btn-awesome;
+    content: map-get($icon-fa, submit);
+  }
+}
+
+/* Style for social icon */
+.box-social {
+  .btn {
+    &.skype {
+      color: map-get($social-color, skype);
+    }
+    &.google {
+      color: map-get($social-color, google);
+    }
+    &.email {
+      color: map-get($social-color, google);
+    }
+    &.chatwork {
+      color: map-get($social-color, chatwork);
+    }
+    &.other {
+      color: map-get($social-color, other);
+    }
+    &.github {
+      color: map-get($social-color, github);
+    }
+    &:hover {
+      color: map-get($social-color, text-hover);
+      border-color: transparent;
+      &.skype {
+        background-color: map-get($social-color, skype);
+      }
+      &.google {
+        background-color: map-get($social-color, google);
+      }
+      &.email {
+        background-color: map-get($social-color, google);
+      }
+      &.chatwork {
+        background-color: map-get($social-color, chatwork);
+      }
+      &.other {
+        background-color: map-get($social-color, other);
+      }
+      &.github {
+        background-color: map-get($social-color, github);
+      }
+    }
+    .fa {
+      text-align: center;
+      font-size: 16px;
+    }
+  }
+}
+
+/* Style for three-dot */
+.three-dot {
+  @include three-dot(1em, 1.4, 2);
+  margin-bottom: 0;
+}
+
+/* Custom style for tab */
+.tab-custom {
+  &.nav-tabs {
+    > li {
+      &.active {
+        > a {
+          color: #555;
+        }
+      }
+    }
+  }
+  &.nav {
+    > li {
+      &.active {
+        border: none;
+        background: none;
+      }
+    }
+  }
+}
+
+/* avatar style */
+.avatar-xs {
+  @include avatar(24px);
+}
+.avatar-sm {
+  @include avatar(32px);
+}
+.avatar-md {
+  @include avatar(64px);
+}
+.avatar-lg {
+  @include avatar(128px);
+}
+.avatar-48 {
+  @include avatar(48px);
+}
+.avatar-190 {
+  @include avatar(190px);
+}
+
+/* style for text */
+.text-over {
+  width: 20em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.text-primary {
+  color: $navy;
+}
+.item-name {
+  color: $text-color;
+  font-weight: 600;
+}
+.item-date {
+  &:before {
+    content: "\f017";
+    font-family: "FontAwesome";
+    padding-right: 4px;
+  }
+}
+.item-label {
+  display: inline-block;
+  min-width: 120px;
+}
+.lb-sm {
+  font-size: 12px;
+}
+
+.modal-notify {
+  .modal-dialog {
+    width: 480px;
+    &.warning {
+      .modal-header {
+        background-color: $yellow;
+        color: $white;
+      }
+    }
+  }
+}
+
+.table {
+  th {
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+  td {
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+/* custom style for column */
+.col-separator {
+  &:after {
+    display: block;
+    content: ' ';
+    height: calc(100% - 15px);
+    position: absolute;
+    top: 0;
+    right: -12px;
+    border-right: 1px dashed $dark-gray;
+  }
+}
+.col-text-right {
+  label {
+    text-align: right;
+  }
+}
+
+.form-horizontal {
+  .control-label {
+    &.text-left {
+      text-align: left;
+    }
+  }
+}
+
+/* Style for required field */
+.form-group {
+  label {
+    &.required {
+      &:after {
+        content: '*';
+        color: $red;
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+/* style for text and link */
+.link-primary {
+  color: $navy;
+  &:hover {
+    color: $dark-gray;
+  }
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-empty,
+.text-na {
+  color: $dark-gray;
+  font-style: italic;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+/* custom style for image */
+img {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  &.img-bordered {
+    border-radius: 50%;
+  }
+  &.img-responsive-190 {
+    max-width: 190px;
+    width: 100%;
+    height: auto;
+  }
+  &.img-circle {
+    object-fit: cover;
+  }
+}
+
+/* styling for loading */
+.loading-icon {
+  &.icon-large {
+    max-width: 80px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  &.icon-inline {
+    max-width: 32px;
+  }
+}
+.logo-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* simple hack to keep font family template */
+.ui-widget {
+  font-family: inherit;
+}
+
+/* Customizing style dropdown-menu | btn toggle */
+.btn-group {
+  &.btn-group-custom {
+    padding-top: 10px;
+    .dropdown-menu {
+      min-width: 300px;
+      max-width: 500px;
+      padding: 15px;
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        width: 0;
+        height: 0;
+      }
+      &:before {
+        left: 20px;
+        bottom: -12px;
+        border-width: 12px 12px 0 12px;
+        border-color: $dark-gray transparent transparent transparent;
+      }
+      &:after {
+        left: 20px;
+        bottom: -11px;
+        border-width: 12px 12px 0 12px;
+        border-color: $white transparent transparent transparent;
+      }
+    }
+  }
+}
+
+/* Adding style for widget action at the bottom */
+.widget-action-bottom {
+  position: fixed;
+  bottom: 0px;
+  background-color: $gray;
+  box-sizing: border-box;
+  width: calc(100% - 220px);
+  padding: 10px 25px;
+  margin-left: -25px;
+  z-index: 9999;
+  &.is-bottom {
+    bottom: 40px;
+  }
+}
+
+ /* style for error */
+.form-group {
+  .help-block {
+    display: none;
+    color: $red;
+  }
+  .ng-invalid {
+    &.ng-dirty {
+      border-color: $red;
+      +.help-block {
+        display: inline-block;
+        margin: 0;
+      }
+    }
+  }
+  .has-error {
+    .help-block {
+      display: inline-block;
+      margin: 0;
+    }
+  }
+}
+
+.feed-element {
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+a {
+  color: $suva-grey;
+  &:hover {
+    color: $navy;
+  }
+}

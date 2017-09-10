@@ -1,0 +1,19 @@
+.ui-dialog {
+  background: $white;
+  &.ui-widget-content {
+    border-width: 0;
+  }
+  .ui-widget-header {
+    background-color: $navy;
+    color: $white;
+    text-transform: capitalize;
+    .ui-dialog-titlebar-close {
+      &:hover {
+        background: none;
+      }
+      .fa {
+        color: $white;
+      }
+    }
+  }
+}

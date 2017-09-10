@@ -1,0 +1,23 @@
+{
+  "district": "Quận huyện",
+  "province": "Tỉnh/Thành phố",
+  "report": {
+    "birthdays": "Thống kê Sinh nhật",
+    "birthday": {
+      "this_month": "Sinh nhật tháng này",
+      "next_month": "Sinh nhật tháng tới"
+    },
+    "events": "Sự kiện sắp diễn ra",
+    "member": "Thống kê thành viên",
+    "user": {
+      "external": "Thành viên tại gia",
+      "internal": "Thành viên tu viện"
+    },
+    "users": "Thống kê Thành viên"
+  },
+  "select_province": "Chọn Tỉnh/Thành phố",
+  "select_district": "Chọn Quận/Huyện",
+  "site_name": "Tu viện Linh Thứu",
+  "site_copyright": "Tu viện Linh Thứu {{year}}",
+  "sysid": "SYSID"
+}

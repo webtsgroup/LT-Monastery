@@ -1,0 +1,151 @@
+.my-tabview {
+  &.is-widget {
+    .ui-tabview {
+      &.ui-widget-content {
+        border: none;
+        .ui-tabview-nav {
+          margin-bottom: 15px;
+          border-bottom: none;
+          .ui-state-default {
+            box-sizing: border-box;
+            border: none;
+            border-radius: 0;
+            font-weight: normal;
+            background-color: $matte-silver;
+            margin: 0 12px 0 0;
+            cursor: pointer;
+            width: calc(25% - 12px);
+            counter-increment: decimal;
+            height: 48px;
+            padding: 10px;
+            &:hover {
+              background-color: $matte-silver;
+            }
+            &:last-of-type,
+            &:last-child {
+              width: calc(25%);
+              margin: 0;
+            }
+            &:first-child {
+              &:before {
+                display: none;
+              }
+            }
+            &:last-child {
+              &:after {
+                display: none;
+              }
+            }
+            &:before,
+            &:after {
+              content: " ";
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-width: 24px 0 24px 10px;
+              position: absolute;
+              top: 0;
+            }
+            &:before {
+              border-color: $matte-silver $matte-silver $matte-silver transparent;
+              margin-left: -10px;
+              left: 0;
+            }
+            &:after {
+              border-color: transparent transparent transparent $matte-silver;
+              margin-right: -10px;
+              right: 0;
+            }
+            @for $i from 1 through 4 {
+              $w: 100% / $i;
+              &.item-#{$i} {
+                width: calc(#{$w} - 12px);
+                &:last-child {
+                  width: #{$w};
+                }
+              }
+            }
+            &.ui-state-disabled {
+              cursor: not-allowed !important;
+              a {
+                cursor: not-allowed;
+              }
+            }
+            &.ui-state-active {
+              background-color: $navy;
+              border-bottom: 0 !important;
+              &:after {
+                border-left-color: $navy;
+              }
+              &:before {
+                border-color: $navy;
+                border-left-color: transparent;
+              }
+              &:hover {
+                background-color: $navy;
+              }
+            }
+            a {
+              color: $matte-gray;
+              line-height: 28px;
+              text-align: center;
+              width: 100%;
+              &:before {
+                content: counter(decimal) ". ";
+                display: inline-block;
+                padding-right: 4px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .ui-tabview {
+    padding: 0;
+    &.ui-widget-content {
+      border: none;
+      .ui-tabview-nav {
+        border-bottom: 1px solid $silver-bold;
+        padding: 0;
+        .ui-state-default {
+          border-top-right-radius: 4px;
+          border-top-left-radius: 4px;
+          text-transform: capitalize;
+          font-weight: normal;
+          color: $text-color;
+          cursor: pointer;
+          padding: 10px 20px;
+          background: none;
+          border-color: transparent;
+          margin-bottom: 0px;
+          &:hover {
+            background-color: $siler;
+            a {
+              color: $text-color;
+            }
+          }
+          a {
+            font-weight: bold;
+            padding: 0;
+            color: $nav-text-color;
+          }
+          &.ui-state-active {
+            border-color: $silver-bold;
+            border-bottom: 1px solid $white !important;
+            &:hover {
+              cursor: default;
+              background-color: transparent;
+            }
+            a {
+              color: $gray-bold;
+            }
+          }
+        }
+      }
+    }
+  }
+  .ui-widget-header {
+    background-color: transparent;
+  }
+}
