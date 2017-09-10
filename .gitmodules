@@ -1,0 +1,5 @@
+path = /api
+api
+  path = /api
+client
+  path = /client
