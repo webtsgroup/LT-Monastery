@@ -69,7 +69,7 @@ export class LoadingDirective implements OnInit, OnChanges {
     }
     this.loadingContent = this.renderer.createElement(this.el.nativeElement.parentNode, 'img');
     //setting class name is text-na
-    this.loadingContent.setAttribute('src', '/assets/img/loading.svg');
+    this.loadingContent.setAttribute('src', './assets/img/loading.svg');
     this.loadingContent.setAttribute('class', cls);
     this.loadingContent.setAttribute('alt', 'Loading...');
   }
