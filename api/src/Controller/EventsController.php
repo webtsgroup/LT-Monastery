@@ -80,6 +80,7 @@ class EventsController extends ApiController
   private function _processUsers($users, $event_id) {
     if ($users) {
       $userEventTable = TableRegistry::get('EventsUsers');
+      $userEventTable->deleteAll(['event_id' => $event_id]);
       $data = [];
       foreach ($users as $key => $value) {
         $obj = [];

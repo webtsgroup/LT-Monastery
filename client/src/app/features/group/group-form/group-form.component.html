@@ -1,0 +1,70 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a [routerLink]="['/events']" class="btn btn-white btn-sm btn-list">{{ 'nav.groups.list' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInit">
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="form">
+          <div class="ibox">
+            <div class="ibox-content">
+              <div class="row m-t-md form-horizontal">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label required">{{ 'group.name' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="name" formControlName="name">
+                      <span class="help-block">{{ 'group.required' | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'group.members' | translate }}</label>
+                    <div class="col-md-8">
+                      <p-autoComplete formControlName="users"
+                                      [suggestions]="metadata.completedUsers"
+                                      field="fullname"
+                                      (completeMethod)="searchUser($event)"
+                                      [multiple]="true">>
+                        <ng-template let-item pTemplate="item">
+                            <div>
+                              <img src="{{ '' | image:'user'}}" class="img-circle avatar-sm"/>
+                              <span>{{item.fullname}}</span>
+                            </div>
+                        </ng-template>
+                      </p-autoComplete>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'group.description' | translate }}</label>
+                    <div class="col-md-8">
+                      <textarea class="form-control input-md" rows="5" name="description" formControlName="description"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="widget-action-bottom">
+      <div class="row">
+        <div class="col-md-12 text-right">
+          <!-- <button type="button" class="btn btn-default btn-reset">{{ 'action.reset' | translate }}</button> -->
+          <button type="button"
+            class="btn btn-primary btn-submit"
+            name="submit"
+            (click)="onSubmit()"
+            [disabled]="!form.valid || isProcessing">
+            {{ 'action.submit' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

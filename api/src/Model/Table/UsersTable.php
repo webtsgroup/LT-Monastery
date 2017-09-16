@@ -31,6 +31,9 @@ class UsersTable extends Table
         $this->belongsToMany('Events', [
             'through' => 'EventsUsers',
         ]);
+        $this->belongsToMany('Groups', [
+            'through' => 'GroupsUsers',
+        ]);
         $this->belongsTo('Jobs', [
           'className' => 'Jobs',
           'foreignKey' => 'job_id'

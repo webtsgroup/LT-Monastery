@@ -7,16 +7,15 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-event-form',
-  templateUrl: './event-form.component.html',
-  styleUrls: ['./event-form.component.scss']
+  selector: 'app-group-form',
+  templateUrl: './group-form.component.html',
+  styleUrls: ['./group-form.component.scss']
 })
-export class EventFormComponent implements OnInit {
+export class GroupFormComponent implements OnInit {
 
   isInit: boolean;
   isProcessing: boolean;
   metadata: any;
-  uploadedFiles: any;
   form: FormGroup;
   itemId: number;
 
@@ -31,7 +30,6 @@ export class EventFormComponent implements OnInit {
     this.metadata = {
       completedUsers: []
     };
-    this.uploadedFiles = [];
   }
 
   ngOnInit() {
@@ -48,46 +46,17 @@ export class EventFormComponent implements OnInit {
 
   initForm() {
   	this.form = this.fb.group({
-  		title: ['', Validators.required],
-      organizer: '',
-      location: '',
-      address: '',
+  		name: ['', Validators.required],
       users: '',
-      start_date: ['', Validators.required],
-      end_date: '',
       description: '',
   	});
   }
 
-  getMetadata() {
-    this.api.get(['events', 'getMetadata']).subscribe(
-      (data: any) => {
-        this.metadata.users = data.result.users || [];
-      }, (err) => {
-        this.isInit = false;
-        //
-      }, () => {
-        this.isInit = false;
-      }
-    );
-  }
-
   fetchData(id: string) {
-    this.api.get(['events', 'view', id, false]).subscribe(
+    this.api.get(['groups', 'view', id, false]).subscribe(
       (data: any) => {
-        this.metadata.event = data.result.event || {};
-        // this.metadata.provinces = data.result.provinces || [];
-        // this.metadata.provinces.filter((obj: any) => {
-        //   obj.text = obj.name;
-        // });
-        // this.metadata.districts = data.result.districts || [];
+        this.metadata.group = data.result.group || {};
         this.metadata.users = data.result.users || [];
-        // this.metadata.users.filter((obj: any) => {
-        //   const _cloneObj = obj;
-        //   obj.label = obj.fullname;
-        //   obj.value = _cloneObj;
-        // });
-        // console.log(this.metadata.users);
         this.setDataForForm();
       }, (err) => {
         //
@@ -97,15 +66,28 @@ export class EventFormComponent implements OnInit {
     );
   }
 
+  getMetadata() {
+    this.api.get(['groups', 'getMetadata']).subscribe(
+      (data: any) => {
+        this.metadata.users = data.result.users || [];
+      }, (err) => {
+        this.isInit = false;
+        //
+      }, () => {
+        this.isInit = false;
+      }
+    );
+  }
+
   setDataForForm() {
-    for (let field in this.metadata.event) {
+    for (let field in this.metadata.group) {
       if (field === 'job_id' || field === 'province_id' || field === 'district_id') {
         // for (let officer of this.team[field]) {
         //   this.addOfficer(officer);
         // }
       } else {
         if (this.form.controls[field]) {
-          this.form.controls[field].setValue(this.metadata.event[field]);
+          this.form.controls[field].setValue(this.metadata.group[field]);
         }
       }
     }
@@ -123,35 +105,20 @@ export class EventFormComponent implements OnInit {
     const data: any = this.form.value;
     if (this.itemId) {
       summary = 'Updated';
-      func = this.api.post(['events', 'update', this.itemId], data);
+      func = this.api.post(['groups', 'update', this.itemId], data);
     } else {
       summary = 'Added';
-      func = this.api.post(['events', 'create'], data);
+      func = this.api.post(['groups', 'create'], data);
     }
     func.subscribe(
       (data: any) => {
-        this.router.navigate(['/events']);
+        this.router.navigate(['/groups']);
       }, () => {
         this.isProcessing = false;
       }, () => {
         this.isProcessing = false;
       }
     );
-  }
-
-  setJob(e: any) {
-    (<FormControl>this.form.controls['manager_id']).setValue(e.id);
-    _.forEach(this.metadata.jobs, (item: any) => {
-      if (item.id === e.id) {
-        this.metadata.selectedItem.job.push(item);
-      }
-    });
-  }
-
-  onUpload(e: any) {
-    for(let file of e.files) {
-      this.uploadedFiles.push(file);
-    }
   }
 
   searchUser(e: any) {
@@ -166,18 +133,6 @@ export class EventFormComponent implements OnInit {
       if (obj.fullname.toLowerCase().indexOf(_query) > -1) {
         this.metadata.completedUsers.push(obj);
       }
-    }
-  }
-
-  setMemberData(e: any, added: boolean = true) {
-    // console.log(this.form.controls.users.value);
-    // console.log(e, added);
-  }
-
-  convertDate(e: any, field: string) {
-    const date = moment(e).format('DD/MM/YYYY');
-    if (this.form.controls[field]) {
-      this.form.controls[field].setValue(date);
     }
   }
 

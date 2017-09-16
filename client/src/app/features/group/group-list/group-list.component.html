@@ -1,0 +1,57 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a class="btn btn-sm btn-default" [routerLink]="['/groups', 'new']">{{ 'nav.groups.new' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInit">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <!-- <div class="row m-b">
+              <div class="col-md-4">
+                <input #search type="text" pInputText placeholder="{{ 'group.filter_by_name' | translate }}" class="form-control">
+              </div>
+              <div class="col-md-5 m-b pull-right">
+                <button class="btn btn-sm btn-default btn-delete" [disabled]="!selectedItems.length">{{ 'action.delete' | translate }}</button>
+              </div>
+            </div> -->
+            <p-dataTable #table
+                         [value]="result"
+                         [rows]="20"
+                         [paginator]="true"
+                         [editable]="true"
+                         [globalFilter]="search"
+                         [(selection)]="selectedItems"
+                         scrollable="true"
+                         sortMode="multiple">
+              <!-- <p-column styleClass="col-cb" selectionMode="multiple"></p-column> -->
+              <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/groups', item.id]">{{item.id}}</a>
+                </ng-template>
+              </p-column>
+              <p-column field="name" header="{{'group.name' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a class="item-name" [routerLink]="['/groups', item.id, 'update']">
+                    {{item.name}}
+                  </a>
+                </ng-template>
+              </p-column>
+
+              <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'group.action' | translate }}">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/groups', item[col.field], 'update']" class="update"></a><button (click)="delete(item[col.field])" class="delete"></button>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

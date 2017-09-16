@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../../shared/module/shared.module';
-import { TeamFormComponent } from './team-form.component';
+import { SharedModule } from '../../../shared/module/shared.module';
+import { GroupFormComponent } from './group-form.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SelectModule } from 'ng2-select';
-import { CKEditorModule } from 'ng2-ckeditor';
 import { TooltipModule } from 'ng2-tooltip';
 import { CustomFormsModule } from 'ng2-validation';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
-import { FileUploadModule } from 'primeng/primeng';
+import { DropdownModule, AutoCompleteModule, CalendarModule } from 'primeng/primeng';
 
 const routes: Routes = [
   {
     path: '',
-    component: TeamFormComponent
+    component: GroupFormComponent
   }
 ];
 
@@ -20,14 +19,15 @@ const routes: Routes = [
   imports: [
     SharedModule,
     SelectModule,
-    CKEditorModule,
     TooltipModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule,
     CustomFormsModule,
+    DropdownModule,
+    AutoCompleteModule,
+    CalendarModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TeamFormComponent]
+  declarations: [GroupFormComponent]
 })
-export class TeamFormModule { }
+export class GroupFormModule { }
