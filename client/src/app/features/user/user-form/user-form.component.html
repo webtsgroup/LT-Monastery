@@ -30,6 +30,27 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.nickname' | translate }}</label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control input-md" name="nickname" formControlName="nickname">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.avatar' | translate }}</label>
+                    <div class="col-md-8">
+                      <p-fileUpload name="avatar"
+                                    (onSelect)="onUpload($event)"
+                                    url="http://localhost:8765/files/upload"
+                                    accept="image/*"
+                                    chooseLabel="{{ 'user.avatar_change' | translate }}"
+                                    maxFileSize="1000000">
+                        <ng-template let-file pTemplate="file">
+                          <img [src]="(file.objectURL | urlSecure)" class="avatar-190">
+                        </ng-template>
+                      </p-fileUpload>
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="name" class="col-md-3 control-label">{{ 'user.phone' | translate }}</label>
                     <div class="col-md-8">
                       <input type="text" class="form-control input-md" name="phone" formControlName="phone">
@@ -115,6 +136,21 @@
                     <label for="name" class="col-md-3 control-label">{{ 'user.address' | translate }}</label>
                     <div class="col-md-8">
                       <input type="text" class="form-control input-md" name="address" formControlName="address">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">{{ 'user.image' | translate }}</label>
+                    <div class="col-md-8">
+                      <p-fileUpload name="myfile[]"
+                                    multiple="true"
+                                    url="./upload.php"
+                                    accept="image/*"
+                                    chooseLabel="{{ 'user.image_select' | translate }}"
+                                    maxFileSize="1000000">
+                        <ng-template let-file pTemplate="file">
+                          <img [src]="(file.objectURL | urlSecure)" class="avatar-190">
+                        </ng-template>
+                      </p-fileUpload>
                     </div>
                   </div>
                 </div>

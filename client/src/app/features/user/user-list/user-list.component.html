@@ -12,14 +12,14 @@
       <div class="col-md-12">
         <div class="ibox">
           <div class="ibox-content">
-            <!-- <div class="row m-b">
+            <div class="row m-b">
               <div class="col-md-4">
                 <input #search type="text" pInputText placeholder="{{ 'user.filter_by_name' | translate }}" class="form-control">
               </div>
-              <div class="col-md-5 m-b pull-right">
-                <button class="btn btn-sm btn-default btn-delete" [disabled]="!selectedItems.length">{{ 'action.delete' | translate }}</button>
+              <div class="col-md-8 text-right">
+                <button type="button" class="btn btn-primary btn-sm btn-export" (click)="table.exportCSV()">{{ 'export.user' | translate }}</button>
               </div>
-            </div> -->
+            </div>
             <p-dataTable #table
                          [value]="result"
                          [rows]="20"
@@ -52,6 +52,7 @@
               </p-column>
               <p-column field="phone" header="{{'user.phone' | translate}}"></p-column>
               <p-column field="email" header="{{'user.email' | translate}}"></p-column>
+              <p-column field="barcode" header="{{'user.barcode' | translate}}"></p-column>
               <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'user.action' | translate }}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/users', userType, item[col.field], 'update']" class="update"></a><button (click)="delete(item[col.field])" class="delete"></button>

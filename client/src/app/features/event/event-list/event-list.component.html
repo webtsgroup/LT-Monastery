@@ -30,7 +30,7 @@
                          scrollable="true"
                          sortMode="multiple">
               <!-- <p-column styleClass="col-cb" selectionMode="multiple"></p-column> -->
-              <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}" [sortable]="true">
+              <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/events', item.id]">{{item.id}}</a>
                 </ng-template>
@@ -45,12 +45,12 @@
               <p-column field="location" header="{{'event.location' | translate}}"></p-column>
               <p-column field="address" header="{{'event.address' | translate}}"></p-column>
               <p-column field="organizer" header="{{'event.organizer' | translate}}"></p-column>
-              <p-column field="start_date" header="{{'event.start_date' | translate}}" [sortable]="true">
+              <p-column field="start_date" header="{{'event.start_date' | translate}}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <span>{{item.start_date * 1000 | date:"dd/MM/yyyy"}}</span>
                 </ng-template>
               </p-column>
-              <p-column field="end_date" header="{{'event.end_date' | translate}}" [sortable]="true">
+              <p-column field="end_date" header="{{'event.end_date' | translate}}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <span *ngIf="item.end_date">{{item.end_date * 1000 | date:"dd/MM/yyyy"}}</span>
                 </ng-template>

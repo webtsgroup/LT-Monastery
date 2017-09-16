@@ -189,9 +189,10 @@ export class UserFormComponent implements OnInit {
   }
 
   onUpload(e: any) {
-    for(let file of e.files) {
-      this.uploadedFiles.push(file);
-    }
+    console.log(e);
+    // for(let file of e.files) {
+    //   this.uploadedFiles.push(file);
+    // }
   }
 
   convertDate(e: any, field: string) {

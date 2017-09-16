@@ -1,5 +1,9 @@
 {
   "district": "Quận huyện",
+  "export": {
+    "event": "Xuất danh sách",
+    "user": "Xuất danh sách"
+  },
   "province": "Tỉnh/Thành phố",
   "report": {
     "birthdays": "Thống kê Sinh nhật",

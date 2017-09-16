@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../../shared/module/shared.module';
-import { UserFormComponent } from './user-form.component';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { SelectModule } from 'ng2-select';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { TooltipModule } from 'ng2-tooltip';
 import { CustomFormsModule } from 'ng2-validation';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { FileUploadModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
+import { SharedModule } from '../../../shared/module/shared.module';
+import { UrlSecurePipe } from '../../../shared/pipe/url/url.secure.pipe';
+import { UserFormComponent } from './user-form.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,6 @@ const routes: Routes = [
     CalendarModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [UserFormComponent]
+  declarations: [UserFormComponent, UrlSecurePipe]
 })
 export class UserFormModule { }

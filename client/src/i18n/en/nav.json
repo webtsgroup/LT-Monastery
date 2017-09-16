@@ -18,6 +18,14 @@
       "update": "Thay đổi thông tin"
     },
     "dashboard": "Thống kê",
+    "groups": {
+      "detail": "Thông tin chi tiết",
+      "list": "Danh sách Nhóm",
+      "management": "Quản lý Nhóm",
+      "module": "Quản lý Nhóm",
+      "new": "Thêm Nhóm",
+      "update": "Thay đổi thông tin"
+    },
     "users": {
       "internal": {
         "detail": "Thông tin Tu sĩ",

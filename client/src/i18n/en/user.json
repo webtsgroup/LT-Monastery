@@ -4,13 +4,17 @@
     "activities": "Quá trình hoạt động",
     "address": "Địa chỉ",
     "avatar": "Avatar",
+    "avatar_change": "Chọn hình đại diện",
     "barcode": "Barcode",
     "birthday": "Sinh nhật",
     "code": "ID",
     "email": "Email",
     "facebook": "Facebook",
     "fullname": "Họ tên",
+    "image": "Hình ảnh",
+    "image_select": "Chọn hình ảnh",
     "job": "Nghề nghiệp",
+    "nickname": "Pháp danh",
     "phone": "SDT",
     "select_job": "Chọn Nghề nghiệp"
   }
