@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ConfirmationService } from 'primeng/primeng';
 import { ApiService } from '../../../core/service/api/api.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class UserListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    private confirm: ConfirmationService
   ) {
     this.isInit = true;
     this.result = [];
@@ -46,14 +48,19 @@ export class UserListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.api.get(['users', 'delete', id]).subscribe(
-      (data: any) => {
-        //this.result = data.result || [];
-      }, (err) => {
-        //
-      }, () => {
-        this.isInit = false;
+    this.confirm.confirm({
+      message: 'Bạn muốn xóa Sự kiện này?',
+      accept: () => {
+        this.api.get(['users', 'delete', id, this.userType]).subscribe(
+          (data: any) => {
+            this.result = data.result || [];
+          }, (err) => {
+            //
+          }, () => {
+            this.isInit = false;
+          }
+        );
       }
-    );
+    });
   }
 }

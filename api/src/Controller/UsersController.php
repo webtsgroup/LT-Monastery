@@ -90,12 +90,13 @@ class UsersController extends ApiController
       }
     }
 
-    public function delete($id)
+    public function delete($id, $type = 'internal')
     {
       $this->request->allowMethod('get');
       $entity = $this->Users->get($id);
       $this->Users->delete($entity);
-      $result = $this->Users->find('all')->toArray();
+      $isInternal = $type === 'internal' ? 1 : 0;
+      $result = $this->Users->find('all')->where(['is_internal' => $isInternal])->contain(['Avatar'])->toArray();
       $this->apiResponse = $result;
     }
 
