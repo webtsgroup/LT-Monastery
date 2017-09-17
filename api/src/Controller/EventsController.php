@@ -20,19 +20,21 @@ class EventsController extends ApiController
       $this->apiResponse = $result;
   }
 
-  public function view($id)
+  public function view($id, $pageUpdate = 1)
   {
       $this->request->allowMethod('get');
       $result = $this->Events->get($id, [
         'contain' => [
           'Users' => function ($q) {
-                return $q->autoFields(false)->select(['id', 'fullname', 'avatar']);
+            return $q->autoFields(false)->select(['id', 'fullname', 'avatar']);
           }
         ]
       ]);
 
       $this->apiResponse['event'] = $this->_parseDate($result);
-      $this->getMetadata();
+      if ($pageUpdate) {
+        $this->getMetadata();
+      }
 
   }
 

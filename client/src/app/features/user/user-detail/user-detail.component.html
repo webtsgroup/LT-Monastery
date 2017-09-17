@@ -50,6 +50,12 @@
           </div>
           <div class="small m-t-md m-l-sm">
             <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-user-secret"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.nickname">{{detail.nickname}}</span>
+              </div>
+            </div>
+            <div class="row m-b-sm">
               <label class="col-md-1"><i class="fa fa-birthday-cake"></i></label>
               <div class="col-md-10 m-l-xs no-padding">
                 <span [emptyData]="detail.birthday">{{detail.birthday}}</span>
@@ -68,7 +74,7 @@
               </div>
             </div>
             <div class="row m-b-sm">
-              <label class="col-md-1"><i class="fa fa-phone"></i></label>
+              <label class="col-md-1"><i class="fa fa-code"></i></label>
               <div class="col-md-10 m-l-xs no-padding">
                 <span [emptyData]="detail.barcode">{{detail.barcode}}</span>
               </div>

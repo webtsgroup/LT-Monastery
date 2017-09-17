@@ -12,14 +12,14 @@
       <div class="col-md-12">
         <div class="ibox">
           <div class="ibox-content">
-            <!-- <div class="row m-b">
+            <div class="row m-b">
               <div class="col-md-4">
                 <input #search type="text" pInputText placeholder="{{ 'event.filter_by_name' | translate }}" class="form-control">
               </div>
-              <div class="col-md-5 m-b pull-right">
-                <button class="btn btn-sm btn-default btn-delete" [disabled]="!selectedItems.length">{{ 'action.delete' | translate }}</button>
+              <div class="col-md-8 text-right">
+                <button type="button" class="btn btn-default btn-sm btn-export" (click)="table.exportCSV()">{{ 'export.event' | translate }}</button>
               </div>
-            </div> -->
+            </div>
             <p-dataTable #table
                          [value]="result"
                          [rows]="20"
@@ -37,7 +37,7 @@
               </p-column>
               <p-column field="title" header="{{'event.title' | translate}}" [sortable]="true">
                 <ng-template let-col let-item="rowData" pTemplate="body">
-                  <a class="item-name" [routerLink]="['/events', item.id, 'update']">
+                  <a class="item-name" [routerLink]="['/events', item.id]">
                     {{item.title}}
                   </a>
                 </ng-template>

@@ -10,6 +10,7 @@
     "code": "ID",
     "email": "Email",
     "facebook": "Facebook",
+    "filter_by_name": "Tìm theo tên",
     "fullname": "Họ tên",
     "image": "Hình ảnh",
     "image_select": "Chọn hình ảnh",

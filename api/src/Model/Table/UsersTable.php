@@ -19,15 +19,6 @@ class UsersTable extends Table
      */
     public function initialize(array $config)
     {
-        // parent::initialize($config);
-        // $this->table('users');
-        // $this->displayField('id');
-        // $this->primaryKey('id');
-        // $this->addBehavior('Timestamp');
-        // $this->belongsToMany('EventsUsers', [
-        //   'className' => 'EventsUsers',
-        //   'foreignKey' => 'user_id'
-        // ]);
         $this->belongsToMany('Events', [
             'through' => 'EventsUsers',
         ]);

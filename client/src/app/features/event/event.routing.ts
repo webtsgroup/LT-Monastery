@@ -20,8 +20,7 @@ export const eventRoutes: Routes = [
           {
             path: '',
             pathMatch: 'full',
-            loadChildren: 'app/features/event/event-form/event-form.module#EventFormModule'
-            //loadChildren: 'app/features/event/event-detail/event-detail.module#EventDetailModule'
+            loadChildren: 'app/features/event/event-detail/event-detail.module#EventDetailModule'
           },
           {
             path: 'update',

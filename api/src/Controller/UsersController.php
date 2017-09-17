@@ -17,7 +17,7 @@ class UsersController extends ApiController
     {
         $isInternal = $type === 'internal' ? 1 : 0;
         $this->request->allowMethod('get');
-        $result = $this->Users->find('all')->where(['is_internal' => $isInternal])->toArray();
+        $result = $this->Users->find('all')->where(['is_internal' => $isInternal])->contain(['Files'])->toArray();
         //debug($this->Users->find('all')->contain(['Events']));
         $this->apiResponse = $result;
     }
@@ -32,7 +32,6 @@ class UsersController extends ApiController
               'Districts',
               'Jobs',
               'Groups',
-              'Files'
             ]
         ]);
         if ($pageUpdate == 1) {

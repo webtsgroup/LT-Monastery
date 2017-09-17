@@ -17,7 +17,7 @@
                 <input #search type="text" pInputText placeholder="{{ 'user.filter_by_name' | translate }}" class="form-control">
               </div>
               <div class="col-md-8 text-right">
-                <button type="button" class="btn btn-primary btn-sm btn-export" (click)="table.exportCSV()">{{ 'export.user' | translate }}</button>
+                <button type="button" class="btn btn-default btn-sm btn-export" (click)="table.exportCSV()">{{ 'export.user' | translate }}</button>
               </div>
             </div>
             <p-dataTable #table
@@ -46,7 +46,7 @@
               <p-column field="avatar" header="{{'user.avatar' | translate}}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/users', userType, item.id]">
-                    <img alt="image" class="img-circle avatar-sm" src="{{ item.avatar | image:'user' }}">
+                    <img alt="image" class="img-circle avatar-sm" src="{{ item?.avatar?.file | image:'user':item?.avatar?.dir }}">
                   </a>
                 </ng-template>
               </p-column>

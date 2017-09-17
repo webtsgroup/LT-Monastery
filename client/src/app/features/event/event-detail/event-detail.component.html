@@ -1,3 +1,95 @@
-<p>
-  event-detail works!
-</p>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb [itemName]="detail?.title"></app-breadcrumb>
+  <div class="col-sm-4">
+    <div class="title-action">
+      <a [routerLink]="['/events', detail.id, 'update']" class="btn btn-white btn-sm btn-edit">
+        {{ 'nav.events.update' | translate }}
+      </a>
+      <a [routerLink]="['/users']" class="btn btn-white btn-sm btn-list">{{ 'nav.events.list' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div [loading]="isInit" class="wrapper wrapper-content page-detail">
+  <ng-template [ngIf]="!isInit">
+  	<div class="row">
+      <div class="col-md-8 col-left" style="width: 70%">
+        <div class="ibox">
+          <div class="ibox-content main-content">
+            <h2 class="m-b-lg">{{ 'event.members' | translate }}</h2>
+            <p-dataTable #table
+                         [value]="detail?.users"
+                         [rows]="20"
+                         [paginator]="true"
+                         [editable]="true"
+                         [globalFilter]="search"
+                         [(selection)]="selectedItems"
+                         scrollable="true"
+                         sortMode="multiple">
+              <!-- <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/users', item.id]">{{item.id}}</a>
+                </ng-template>
+              </p-column> -->
+              <p-column field="fullname" header="{{'user.fullname' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a class="item-name" [routerLink]="['/users', item.id]">
+                    {{item.fullname}}
+                  </a>
+                </ng-template>
+              </p-column>
+              <p-column field="code" header="{{'user.code' | translate}}"></p-column>
+              <p-column field="avatar" header="{{'user.avatar' | translate}}">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/users', item.id]">
+                    <img alt="image" class="img-circle avatar-sm" src="{{ item?.avatar?.file | image:'user':item?.avatar?.dir }}">
+                  </a>
+                </ng-template>
+              </p-column>
+              <p-column field="phone" header="{{'user.phone' | translate}}"></p-column>
+              <p-column field="email" header="{{'user.email' | translate}}"></p-column>
+              <p-column field="barcode" header="{{'user.barcode' | translate}}"></p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-right" style="width: 30%">
+        <div class="section-top">
+          <h2 class="m-t-sm m-b-xs">{{detail.title}}</h2>
+        </div>
+        <div class="section-bottom  no-bg">
+          <div class="small m-l-sm">
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-user-secret"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.organizer">{{detail.organizer}}</span>
+              </div>
+            </div>
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-calendar"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.start_date">{{detail.start_date}}</span>
+                &nbsp;-&nbsp;
+                <span [emptyData]="detail.end_date">{{detail.end_date}}</span>
+              </div>
+            </div>
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-location-arrow"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.location">{{detail.location}}</span>
+              </div>
+            </div>
+            <div class="row m-b-sm">
+              <label class="col-md-1"><i class="fa fa-map-marker"></i></label>
+              <div class="col-md-10 m-l-xs no-padding">
+                <span [emptyData]="detail.address">{{detail.address}}</span>
+              </div>
+            </div>
+            <div class="row">
+              {{detail.description}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

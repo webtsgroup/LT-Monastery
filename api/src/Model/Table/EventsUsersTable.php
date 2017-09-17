@@ -27,5 +27,10 @@ class EventsUsersTable extends Table
         'className' => 'Users',
         'foreignKey' => 'user_id'
       ]);
+      $this->hasOne('Files', [
+        'className' => 'Files',
+        'propertyName' => 'avatar',
+        'foreignKey' => 'refer_id'
+      ])->setConditions(['refer_type' => 'avatar']);
     }
 }
