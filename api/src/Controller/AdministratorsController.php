@@ -109,7 +109,7 @@ class AdministratorsController extends ApiController
       $this->request->allowMethod('get');
       $entity = $this->Administrators->get($id);
       $this->Administrators->delete($entity);
-      $result = $this->Administrators->find('all')->toArray();
+      $result = $this->Administrators->find('all')->contain(['Roles'])->toArray();
       $this->apiResponse = $result;
     }
 }

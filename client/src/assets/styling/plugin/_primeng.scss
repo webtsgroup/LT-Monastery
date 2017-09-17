@@ -85,3 +85,29 @@
     }
   }
 }
+
+.ui-dialog {
+  .ui-button-text-icon-left .ui-button-text {
+    padding-left: 1.2em;
+  }
+  button {
+    &.ui-button {
+      padding: 6px 12px;
+      border-radius: 3px;
+      &:focus {
+        color: $text-color;
+        background: transparent;
+        border-color: $border-color;
+      }
+      &:hover {
+        color: $white !important;
+        background: $navy !important;
+        border-color: $navy !important;
+      }
+    }
+  }
+}
+
+.ui-dialog-footer {
+  border-style: solid none none none;
+}

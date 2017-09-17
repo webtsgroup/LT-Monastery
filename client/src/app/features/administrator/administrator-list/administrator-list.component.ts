@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../core/service/api/api.service';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   selector: 'app-administrator-list',
@@ -13,7 +14,10 @@ export class AdministratorListComponent implements OnInit {
   result: any;
   selectedItems: Array<any>;
 
-  constructor(private api: ApiService) {
+  constructor(
+    private api: ApiService,
+    private confirm: ConfirmationService
+  ) {
     this.isInit = true;
     this.result = [];
     this.selectedItems = [];
@@ -36,15 +40,21 @@ export class AdministratorListComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.api.get(['administrators', 'delete', id]).subscribe(
-      (data: any) => {
-        //this.result = data.result || [];
-      }, (err) => {
-        //
-      }, () => {
-        this.isInit = false;
-      }
-    );
+    this.confirm.confirm({
+        message: 'Bạn muốn xóa Sự kiện này?',
+        accept: () => {
+          this.api.get(['administrators', 'delete', id]).subscribe(
+            (data: any) => {
+              this.result = data.result || [];
+            }, (err) => {
+              //
+            }, () => {
+              this.isInit = false;
+            }
+          );
+        }
+    });
+
   }
 
 }

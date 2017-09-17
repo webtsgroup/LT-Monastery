@@ -49,7 +49,7 @@ export class UserListComponent implements OnInit {
 
   delete(id: number) {
     this.confirm.confirm({
-      message: 'Bạn muốn xóa Sự kiện này?',
+      message: 'Bạn muốn xóa người này?',
       accept: () => {
         this.api.get(['users', 'delete', id, this.userType]).subscribe(
           (data: any) => {
