@@ -70,7 +70,7 @@ export class UserFormComponent implements OnInit {
       nickname: '',
       birthday: '',
       barcode: '',
-      avatar: '',
+      //avatar: '',
       address: '',
       province_id: ['', Validators.compose([
           CustomValidators.digits

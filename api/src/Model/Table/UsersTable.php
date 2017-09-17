@@ -41,15 +41,15 @@ class UsersTable extends Table
           'className' => 'Groups',
           'foreignKey' => 'group_id'
         ]);
-        $this->hasOne('Files', [
+        $this->hasOne('Avatar', [
           'className' => 'Files',
           'propertyName' => 'avatar',
           'foreignKey' => 'refer_id'
         ])->setConditions(['refer_type' => 'avatar']);
-        // $this->hasMany('Files', [
-        //   'className' => 'Files',
-        //   'propertyName' => 'images',
-        //   'foreignKey' => 'refer_id'
-        // ])->setConditions(['refer_type' => 'image']);
+        $this->hasMany('Images', [
+          'className' => 'Files',
+          'propertyName' => 'images',
+          'foreignKey' => 'refer_id'
+        ])->setConditions(['refer_type' => 'image']);
     }
 }

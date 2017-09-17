@@ -32,7 +32,7 @@
               </p-column> -->
               <p-column field="fullname" header="{{'user.fullname' | translate}}" [sortable]="true">
                 <ng-template let-col let-item="rowData" pTemplate="body">
-                  <a class="item-name" [routerLink]="['/users', item.id]">
+                  <a class="item-name" [routerLink]="['/users', item?.is_internal == 1 ? 'internal' : 'external', item.id]">
                     {{item.fullname}}
                   </a>
                 </ng-template>
