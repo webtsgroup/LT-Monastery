@@ -35,17 +35,25 @@
                       <input type="text" class="form-control input-md" name="nickname" formControlName="nickname">
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div *ngIf="itemId" class="form-group">
                     <label for="name" class="col-md-3 control-label">{{ 'user.avatar' | translate }}</label>
                     <div class="col-md-8">
                       <p-fileUpload name="avatar"
-                                    (onUpload)="onUpload($event)"
+                                    (onUpload)="onUploadAvatar($event)"
                                     url="{{urlUpload.avatar}}"
                                     accept="image/*"
                                     chooseLabel="{{ 'user.avatar_change' | translate }}"
                                     maxFileSize="1000000">
                         <ng-template let-file pTemplate="file">
                           <img [src]="(file.objectURL | urlSecure)" class="avatar-190">
+                          <!-- <ng-template [ngIf]="!file && metadata?.user?.avatar">
+                            {{content | json}}
+                            <img src="{{ metadata?.user?.avatar?.file | image:'user':metadata?.user?.avatar.dir }}" class="avatar-190">
+                          </ng-template> -->
+                        </ng-template>
+                        <ng-template let-file pTemplate="content" [ngIf]="!file && metadata?.user?.avatar">
+                          {{content | json}}
+                          <img src="{{ metadata?.user?.avatar?.file | image:'user':metadata?.user?.avatar.dir }}" class="avatar-190">
                         </ng-template>
                       </p-fileUpload>
                     </div>
@@ -138,11 +146,11 @@
                       <input type="text" class="form-control input-md" name="address" formControlName="address">
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div *ngIf="itemId" class="form-group">
                     <label for="name" class="col-md-3 control-label">{{ 'user.image' | translate }}</label>
                     <div class="col-md-8">
                       <p-fileUpload name="images[]"
-                                    (onUpload)="onUpload($event)"
+                                    (onUpload)="onUploadImage($event)"
                                     multiple="true"
                                     url="{{urlUpload.image}}"
                                     accept="image/*"
@@ -151,6 +159,18 @@
                         <!-- <ng-template let-file pTemplate="file">
                           <img [src]="(file.objectURL | urlSecure)" class="avatar-190">
                         </ng-template> -->
+                        <ng-template pTemplate="content">
+                          <table class="table table-striped">
+                            <tr *ngFor="let item of metadata?.user?.images">
+                              <td>
+                                <img alt="image" class="avatar-sm" src="{{ item?.file | image:'user':item?.dir }}">
+                              </td>
+                              <td>{{item?.file }}</td>
+                              <td></td>
+                              <td><button (click)="deleteImage(item?.id)" class="btn btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                            </tr>
+                          </table>
+                        </ng-template>
                       </p-fileUpload>
                     </div>
                   </div>

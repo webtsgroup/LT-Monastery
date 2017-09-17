@@ -31,7 +31,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   fetchData() {
-    this.api.get(['events', 'view', this.itemId]).subscribe(
+    this.api.get(['events', 'view', this.itemId, 0]).subscribe(
       (data: any) => {
         this.detail = data.result.event || {};
       }, (err) => {

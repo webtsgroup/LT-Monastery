@@ -50,6 +50,6 @@ class UsersTable extends Table
           'className' => 'Files',
           'propertyName' => 'images',
           'foreignKey' => 'refer_id'
-        ])->setConditions(['refer_type' => 'image']);
+        ])->setConditions(['refer_type' => 'images']);
     }
 }

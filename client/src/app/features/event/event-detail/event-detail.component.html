@@ -5,7 +5,7 @@
       <a [routerLink]="['/events', detail.id, 'update']" class="btn btn-white btn-sm btn-edit">
         {{ 'nav.events.update' | translate }}
       </a>
-      <a [routerLink]="['/users']" class="btn btn-white btn-sm btn-list">{{ 'nav.events.list' | translate }}</a>
+      <a [routerLink]="['/events']" class="btn btn-white btn-sm btn-list">{{ 'nav.events.list' | translate }}</a>
     </div>
   </div>
 </div>
@@ -38,7 +38,7 @@
                 </ng-template>
               </p-column>
               <p-column field="code" header="{{'user.code' | translate}}"></p-column>
-              <p-column field="avatar" header="{{'user.avatar' | translate}}">
+              <p-column styleClass="col-sysid" field="avatar" header="{{'user.avatar' | translate}}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/users', item.id]">
                     <img alt="image" class="img-circle avatar-sm" src="{{ item?.avatar?.file | image:'user':item?.avatar?.dir }}">
@@ -57,7 +57,7 @@
           <h2 class="m-t-sm m-b-xs">{{detail.title}}</h2>
         </div>
         <div class="section-bottom  no-bg">
-          <div class="small m-l-sm">
+          <div class="m-l-sm">
             <div class="row m-b-sm">
               <label class="col-md-1"><i class="fa fa-user-secret"></i></label>
               <div class="col-md-10 m-l-xs no-padding">

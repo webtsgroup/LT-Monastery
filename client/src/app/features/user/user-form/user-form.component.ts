@@ -197,8 +197,17 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  onUpload(e: any) {
-    this.uploadedFiles = JSON.parse(e.xhr.response).result || [];
+  onUploadImage(e: any) {
+    let newImages = JSON.parse(e.xhr.response).result || [];
+    this.metadata.user.images = this.metadata.user.images.concat(newImages);
+  }
+
+  onUploadAvatar(e: any) {
+    this.metadata.user.avatar = JSON.parse(e.xhr.response).result || {};
+  }
+
+  deleteImage() {
+    
   }
 
   convertDate(e: any, field: string) {

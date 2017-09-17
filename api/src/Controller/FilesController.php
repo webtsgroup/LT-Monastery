@@ -18,6 +18,10 @@ class FilesController extends ApiController
     $this->request->allowMethod('post');
     $_data = $this->request->data;
     if (is_array($_data[$refer_type]) && isset($_data[$refer_type]['tmp_name'])) {
+      $this->Files->deleteAll([
+        'refer_type' => $refer_type,
+        'refer_id' => $refer_id]
+      );
       $_data['file'] = $_data[$refer_type];
       $_data['refer_type'] = $refer_type;
       $_data['refer_id'] = $refer_id;

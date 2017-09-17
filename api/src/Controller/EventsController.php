@@ -25,9 +25,8 @@ class EventsController extends ApiController
       $this->request->allowMethod('get');
       $result = $this->Events->get($id, [
         'contain' => [
-          'Users' => function ($q) {
-            return $q->autoFields(false)->select(['id', 'fullname', 'avatar']);
-          }
+          'Users',
+          'Users.Avatar'
         ]
       ]);
 

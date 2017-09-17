@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../core/service/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../environments/environment';
+
+const apiBaseUrl = `${environment.apiBaseUrl}`;
 
 @Component({
   selector: 'app-user-detail',
@@ -36,6 +39,13 @@ export class UserDetailComponent implements OnInit {
     this.api.get(['/users', 'view', this.itemId]).subscribe(
       (data: any) => {
         this.detail = data.result.user || {};
+        this.detail.galleries = [];
+        if (this.detail.images) {
+          for (let img of this.detail.images) {
+            let src = `${apiBaseUrl}/${img.dir.replace('webroot/', '')}${img.file}`;
+            this.detail.galleries.push({source: src});
+          }
+        }
       }, (err) => {
         //
       }, () => {

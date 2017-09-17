@@ -31,6 +31,10 @@
                   </div>
               </div>
             </div>
+            <div *ngIf="detail?.galleries && detail?.galleries.length" style="clear: left" class="m-t-lg">
+              <h2 class="m-b-sm">{{ 'user.image' | translate }}</h2>
+              <p-galleria [images]="detail?.galleries" panelWidth="500" panelHeight="313" [showCaption]="true"></p-galleria>
+            </div>
           </div>
         </div>
       </div>
@@ -48,7 +52,7 @@
               <i class="fa fa-facebook" aria-hidden="true"></i>
             </a>
           </div>
-          <div class="small m-t-md m-l-sm">
+          <div class="m-t-md m-l-sm">
             <div class="row m-b-sm">
               <label class="col-md-1"><i class="fa fa-user-secret"></i></label>
               <div class="col-md-10 m-l-xs no-padding">
