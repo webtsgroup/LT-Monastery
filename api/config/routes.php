@@ -55,7 +55,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->connect('/users/index', ['controller' => 'Users', 'action' => 'index', 'allowWithoutToken' => true]);
 
-    $routes->connect('/files/upload', ['controller' => 'Files', 'action' => 'upload', 'allowWithoutToken' => true]);
+    $routes->connect('/files/upload/*', ['controller' => 'Files', 'action' => 'upload', 'allowWithoutToken' => true]);
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.

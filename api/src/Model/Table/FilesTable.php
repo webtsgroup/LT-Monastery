@@ -28,5 +28,21 @@ class FilesTable extends Table
         //   'className' => 'EventsFiles',
         //   'foreignKey' => 'user_id'
         // ]);
+        $this->setDisplayField('mod');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            // You can configure as many upload fields as possible,
+            // where the pattern is `field` => `config`
+            //
+            // Keep in mind that while this plugin does not have any limits in terms of
+            // number of files uploaded per request, you should keep this down in order
+            // to decrease the ability of your users to block other requests.
+            'file' => [
+              'fields' => [
+                    // if these fields or their defaults exist
+                    // the values will be set.
+                    'dir' => 'dir'
+              ]
+            ],
+        ]);
     }
 }

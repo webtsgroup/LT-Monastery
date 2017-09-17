@@ -12,7 +12,9 @@
         "cakephp/plugin-installer": "~1.0",
         "josegonzalez/dotenv": "2.*",
         "multidots/cakephp-rest-api": "^1.0",
-        "ozee31/cakephp-cors": "^1.1"
+        "ozee31/cakephp-cors": "^1.1",
+        "josegonzalez/cakephp-upload": "^3.7",
+        "imagine/imagine": "^0.7.1"
     },
     "require-dev": {
         "psy/psysh": "@stable",

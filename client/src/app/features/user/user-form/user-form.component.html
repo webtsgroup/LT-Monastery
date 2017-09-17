@@ -39,8 +39,8 @@
                     <label for="name" class="col-md-3 control-label">{{ 'user.avatar' | translate }}</label>
                     <div class="col-md-8">
                       <p-fileUpload name="avatar"
-                                    (onSelect)="onUpload($event)"
-                                    url="http://localhost:8765/files/upload"
+                                    (onUpload)="onUpload($event)"
+                                    url="{{urlUpload.avatar}}"
                                     accept="image/*"
                                     chooseLabel="{{ 'user.avatar_change' | translate }}"
                                     maxFileSize="1000000">
@@ -141,15 +141,16 @@
                   <div class="form-group">
                     <label for="name" class="col-md-3 control-label">{{ 'user.image' | translate }}</label>
                     <div class="col-md-8">
-                      <p-fileUpload name="myfile[]"
+                      <p-fileUpload name="images[]"
+                                    (onUpload)="onUpload($event)"
                                     multiple="true"
-                                    url="./upload.php"
+                                    url="{{urlUpload.image}}"
                                     accept="image/*"
                                     chooseLabel="{{ 'user.image_select' | translate }}"
                                     maxFileSize="1000000">
-                        <ng-template let-file pTemplate="file">
+                        <!-- <ng-template let-file pTemplate="file">
                           <img [src]="(file.objectURL | urlSecure)" class="avatar-190">
-                        </ng-template>
+                        </ng-template> -->
                       </p-fileUpload>
                     </div>
                   </div>

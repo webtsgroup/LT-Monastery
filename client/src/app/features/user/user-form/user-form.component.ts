@@ -5,6 +5,9 @@ import { CustomValidators } from 'ng2-validation';
 import { ApiService } from '../../../core/service/api/api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { environment } from '../../../../environments/environment';
+
+const apiBaseUrl = `${environment.apiBaseUrl}`;
 
 @Component({
   selector: 'app-user-form',
@@ -19,6 +22,7 @@ export class UserFormComponent implements OnInit {
   uploadedFiles: any;
   form: FormGroup;
   itemId: number;
+  urlUpload: any;
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +40,9 @@ export class UserFormComponent implements OnInit {
       }
     };
     this.uploadedFiles = [];
+    this.urlUpload = {};
+    this.urlUpload['image'] = `${apiBaseUrl}/files/upload/images`;
+    this.urlUpload['avatar'] = `${apiBaseUrl}/files/upload/avatar`;
   }
 
   ngOnInit() {
@@ -43,6 +50,8 @@ export class UserFormComponent implements OnInit {
       this.initForm();
       if (params.id) {
         this.itemId = +params.id;
+        this.urlUpload['image'] += `/${this.itemId}`;
+        this.urlUpload['avatar'] += `/${this.itemId}`;
         this.fetchData();
       } else {
         this.getMetadata();
@@ -189,10 +198,7 @@ export class UserFormComponent implements OnInit {
   }
 
   onUpload(e: any) {
-    console.log(e);
-    // for(let file of e.files) {
-    //   this.uploadedFiles.push(file);
-    // }
+    this.uploadedFiles = JSON.parse(e.xhr.response).result || [];
   }
 
   convertDate(e: any, field: string) {

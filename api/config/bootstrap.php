@@ -217,5 +217,5 @@ if (Configure::read('debug')) {
 }
 
 Plugin::load('RestApi', ['bootstrap' => true]);
-//Plugin::load('Josegonzalez/Upload', ['bootstrap' => true]);
+Plugin::load('Josegonzalez/Upload');
 //Plugin::load('Cors', ['bootstrap' => true, 'routes' => false]);

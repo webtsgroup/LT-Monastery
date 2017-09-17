@@ -31,7 +31,8 @@ class UsersController extends ApiController
               'Provinces',
               'Districts',
               'Jobs',
-              'Groups'
+              'Groups',
+              'Files'
             ]
         ]);
         if ($pageUpdate == 1) {

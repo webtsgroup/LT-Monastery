@@ -12,7 +12,7 @@
 <div [loading]="isInit" class="wrapper wrapper-content page-detail">
   <ng-template [ngIf]="!isInit">
   	<div class="row">
-      <div class="col-md-8 col-left">
+      <div class="col-md-8 col-left" style="width: 70%">
         <div class="ibox">
           <div class="ibox-content main-content">
             <h2 class="m-b-lg">{{ 'user.activities' | translate }}</h2>
@@ -34,9 +34,9 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 col-right">
+      <div class="col-md-4 col-right" style="width: 30%">
         <div class="section-top">
-          <img src="{{ detail.avatar_url | image:'user' }}" class="img-circle text-center" alt="avatar">
+          <img src="{{ detail?.avatar?.file | image:'user':detail?.avatar?.dir }}" class="img-circle text-center" alt="avatar">
           <h2 class="m-t-sm m-b-xs">{{detail.fullname}}</h2>
         </div>
         <div class="section-bottom  no-bg">
@@ -58,7 +58,7 @@
             <div class="row m-b-sm">
               <label class="col-md-1"><i class="fa fa-user"></i></label>
               <div class="col-md-10 m-l-xs no-padding">
-                <span [emptyData]="detail.job">{{detail.job.name}}</span>
+                <span [emptyData]="detail?.job?.name">{{detail?.job?.name}}</span>
               </div>
             </div>
             <div class="row m-b-sm">
@@ -78,7 +78,7 @@
               <div class="col-md-10 m-l-xs no-padding">
                 <span [emptyData]="detail.address">{{detail.address}}</span>
                 <br>
-                <span [emptyData]="detail.district">{{detail?.district?.name}}</span>
+                <span [emptyData]="detail?.district?.name">{{detail?.district?.name}}</span>
                 <br>
                 <span [emptyData]="detail?.province?.name">{{detail?.province?.name}}</span>
               </div>
