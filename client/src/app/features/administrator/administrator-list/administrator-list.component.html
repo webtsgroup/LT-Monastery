@@ -50,7 +50,8 @@
               </p-column>
               <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'user.action' | translate }}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
-                  <a [routerLink]="['/administrators', item[col.field], 'update']" class="update"></a><button (click)="delete(item[col.field])" class="delete"></button>
+                  <a [permission]="['administrators', 'u']" [routerLink]="['/administrators', item[col.field], 'update']" class="update"></a>
+                  <button [permission]="['administrators', 'd']" (click)="delete(item[col.field])" class="delete"></button>
                 </ng-template>
               </p-column>
             </p-dataTable>

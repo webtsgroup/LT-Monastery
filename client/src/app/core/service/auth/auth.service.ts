@@ -5,6 +5,37 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
+
+const FEATURES: any = {
+  users: ['c', 'r', 'u', 'd', 'view', 'filter', 'export'],
+  events: ['c', 'r', 'u', 'd', 'view', 'filter', 'export'],
+  administrators: ['c', 'r', 'u', 'd', 'view'],
+  groups: ['c', 'r', 'u', 'd', 'view']
+};
+
+const ROLES = ['admin', 'editor', 'input'];
+let PERMISSIONS: any = {};
+
+const MIX = function() {
+  for (let role of ROLES) {
+    PERMISSIONS[role] = {};
+    for (let key in FEATURES) {
+      PERMISSIONS[role][key] = {};
+      for (let action of FEATURES[key]) {
+        let allow: number = 1;
+        if (role !== 'admin') {
+          if (key === 'administrators') {
+            allow = 0;
+          }
+        }
+        PERMISSIONS[role][key][action] = allow;
+      }
+    }
+  }
+};
+
+MIX();
+
 @Injectable()
 export class AuthService {
 
@@ -86,6 +117,11 @@ export class AuthService {
     // Store current url as referral and use latter for login redirection
     this.setRoute(current);
     this.router.navigate(['/auth/login']);
+  }
+
+  checkPermission(feature: string, action: string) {
+    const role = this.getUserInfo().role.code;
+    return PERMISSIONS[role][feature][action] === 1 ? true : false;
   }
 
 }
