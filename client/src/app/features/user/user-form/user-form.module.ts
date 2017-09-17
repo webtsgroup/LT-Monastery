@@ -5,7 +5,7 @@ import { SelectModule } from 'ng2-select';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { TooltipModule } from 'ng2-tooltip';
 import { CustomFormsModule } from 'ng2-validation';
-import { CalendarModule, GalleriaModule, FileUploadModule } from 'primeng/primeng';
+import { CalendarModule, GalleriaModule, FileUploadModule, ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
 import { SharedModule } from '../../../shared/module/shared.module';
 import { UrlSecurePipe } from '../../../shared/pipe/url/url.secure.pipe';
 import { UserFormComponent } from './user-form.component';
@@ -29,8 +29,10 @@ const routes: Routes = [
     CustomFormsModule,
     CalendarModule,
     GalleriaModule,
+    ConfirmDialogModule,
     RouterModule.forChild(routes)
   ],
+  providers: [ConfirmationService],
   declarations: [UserFormComponent, UrlSecurePipe]
 })
 export class UserFormModule { }

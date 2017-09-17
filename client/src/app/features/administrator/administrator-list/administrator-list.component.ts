@@ -41,7 +41,7 @@ export class AdministratorListComponent implements OnInit {
 
   delete(id: number) {
     this.confirm.confirm({
-        message: 'Bạn muốn xóa Sự kiện này?',
+        message: 'Bạn muốn xóa Người này?',
         accept: () => {
           this.api.get(['administrators', 'delete', id]).subscribe(
             (data: any) => {

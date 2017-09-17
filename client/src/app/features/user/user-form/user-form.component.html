@@ -53,7 +53,7 @@
                         </ng-template>
                         <ng-template let-file pTemplate="content" [ngIf]="!file && metadata?.user?.avatar">
                           {{content | json}}
-                          <img src="{{ metadata?.user?.avatar?.file | image:'user':metadata?.user?.avatar.dir }}" class="avatar-190">
+                          <img src="{{ metadata?.user?.avatar?.file | image:'user':metadata?.user?.avatar?.dir }}" class="avatar-190">
                         </ng-template>
                       </p-fileUpload>
                     </div>
@@ -167,7 +167,7 @@
                               </td>
                               <td>{{item?.file }}</td>
                               <td></td>
-                              <td><button (click)="deleteImage(item?.id)" class="btn btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                              <td><button (click)="deleteImage(item.id)" class="btn btn-default"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
                             </tr>
                           </table>
                         </ng-template>
@@ -197,3 +197,4 @@
     </div>
   </ng-template>
 </div>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

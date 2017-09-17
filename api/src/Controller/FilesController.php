@@ -45,4 +45,13 @@ class FilesController extends ApiController
     }
   }
 
+  public function delete($id, $refer_type = 'images', $refer_id = 0)
+  {
+    $this->request->allowMethod('get');
+    $entity = $this->Files->get($id);
+    $this->Files->delete($entity);
+    $result = $this->Files->find('all')->where(['refer_type' => $refer_type, 'refer_id' => $refer_id])->toArray();
+    $this->apiResponse = $result;
+  }
+
 }

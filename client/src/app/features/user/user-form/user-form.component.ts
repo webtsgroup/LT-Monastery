@@ -5,6 +5,7 @@ import { CustomValidators } from 'ng2-validation';
 import { ApiService } from '../../../core/service/api/api.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { ConfirmationService } from 'primeng/primeng';
 import { environment } from '../../../../environments/environment';
 
 const apiBaseUrl = `${environment.apiBaseUrl}`;
@@ -28,7 +29,8 @@ export class UserFormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    private confirm: ConfirmationService
   ) {
     this.isInit = true;
     this.isProcessing = false;
@@ -206,8 +208,21 @@ export class UserFormComponent implements OnInit {
     this.metadata.user.avatar = JSON.parse(e.xhr.response).result || {};
   }
 
-  deleteImage() {
-    
+  deleteImage(id: number) {
+    this.confirm.confirm({
+      message: 'Bạn muốn xóa Ảnh này?',
+      accept: () => {
+        this.api.get(['files', 'delete', id, 'images', this.metadata.user.id]).subscribe(
+          (data: any) => {
+            this.metadata.user.images = data.result || [];
+          }, (err) => {
+            //
+          }, () => {
+            this.isInit = false;
+          }
+        );
+      }
+    });
   }
 
   convertDate(e: any, field: string) {

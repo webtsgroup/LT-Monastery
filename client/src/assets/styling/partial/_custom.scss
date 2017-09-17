@@ -419,7 +419,7 @@ img {
   width: calc(100% - 220px);
   padding: 10px 25px;
   margin-left: -25px;
-  z-index: 9999;
+  z-index: 1;
   &.is-bottom {
     bottom: 40px;
   }
