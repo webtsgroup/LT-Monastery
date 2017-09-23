@@ -14,6 +14,8 @@ export class UserListComponent implements OnInit {
   // user list
   result: any;
   selectedItems: Array<any>;
+  columnOptions: any;
+  cols: any[];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +29,19 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cols = [
+      { field: 'barcode', header: 'Barcode' },
+      { field: 'phone', header: 'SDT' },
+      { field: 'email', header: 'Email' },
+      { field: 'facebook', header: 'Facebook' },
+      { field: 'address', header: 'Địa chỉ' },
+      { field: 'birthday', header: 'Ngày sinh' }
+    ];
+
+    this.columnOptions = [];
+    for(let i = 0; i < this.cols.length; i++) {
+        this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
+    }
     this.route.params.subscribe(params => {
       if (params.slug) {
         this.userType = params.slug;

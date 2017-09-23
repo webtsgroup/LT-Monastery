@@ -13,10 +13,11 @@
         <div class="ibox">
           <div class="ibox-content">
             <div class="row m-b">
-              <div class="col-md-4">
-                <input #search type="text" pInputText placeholder="{{ 'user.filter_by_name' | translate }}" class="form-control">
+              <div class="col-md-2">
+                <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+                <input #search type="text" pInputText placeholder="{{ 'user.filter_by_name' | translate }}" class="form-control hidden">
               </div>
-              <div class="col-md-8 text-right">
+              <div class="col-md-10 text-right">
                 <button type="button" class="btn btn-default btn-sm btn-export" (click)="table.exportCSV()">{{ 'export.user' | translate }}</button>
               </div>
             </div>
@@ -30,29 +31,34 @@
                          scrollable="true"
                          sortMode="multiple">
               <!-- <p-column styleClass="col-cb" selectionMode="multiple"></p-column> -->
-              <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}" [sortable]="true">
+              <!-- <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}" [sortable]="true">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/users', userType, item.id]">{{item.id}}</a>
                 </ng-template>
-              </p-column>
-              <p-column field="fullname" header="{{'user.fullname' | translate}}" [sortable]="true">
-                <ng-template let-col let-item="rowData" pTemplate="body">
-                  <a class="item-name" [routerLink]="['/users', userType, item.id]">
-                    {{item.fullname}}
-                  </a>
-                </ng-template>
-              </p-column>
-              <p-column field="code" header="{{'user.code' | translate}}"></p-column>
-              <p-column field="avatar" header="{{'user.avatar' | translate}}">
+              </p-column> -->
+              <p-column styleClass="col-img" field="avatar" header="">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/users', userType, item.id]">
                     <img alt="image" class="img-circle avatar-sm" src="{{ item?.avatar?.file | image:'user':item?.avatar?.dir }}">
                   </a>
                 </ng-template>
               </p-column>
-              <p-column field="phone" header="{{'user.phone' | translate}}"></p-column>
-              <p-column field="email" header="{{'user.email' | translate}}"></p-column>
-              <p-column field="barcode" header="{{'user.barcode' | translate}}"></p-column>
+              <p-column field="fullname" header="{{'user.fullname' | translate}}" [filter]="true" [sortable]="true" filterMatchMode="contains">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a class="item-name" [routerLink]="['/users', userType, item.id]">
+                    {{item.fullname}}
+                  </a>
+                </ng-template>
+              </p-column>
+              <p-column field="code" header="{{'user.code' | translate}}" [filter]="true" filterMatchMode="contains" [sortable]="true"></p-column>
+              <!-- <p-column field="barcode" header="{{'user.barcode' | translate}}" [filter]="true" [sortable]="true"></p-column>
+              <p-column field="phone" header="{{'user.phone' | translate}}" [filter]="true" [sortable]="true"></p-column>
+              <p-column field="email" header="{{'user.email' | translate}}" [filter]="true" [sortable]="true"></p-column> -->
+              <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [filter]="true" filterMatchMode="contains" [sortable]="true">
+                <!-- <ng-template [ngIf]="col.field === 'facebook'" let-item="rowData" pTemplate="body">
+                  <a href="{{item?.facebook}}" >{{item?.facebook}}</a>
+                </ng-template> -->
+              </p-column>
               <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'user.action' | translate }}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/users', userType, item[col.field], 'update']" class="update"></a><button (click)="delete(item[col.field])" class="delete"></button>

@@ -19,6 +19,13 @@
       border-right: none;
     }
   }
+  .ui-column-filter {
+    &.ui-inputtext {
+      border-radius: 3px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+  }
   thead {
     tr {
       border-bottom: 1px solid $silver-bold;
@@ -177,10 +184,16 @@
       &.col-sysid {
         width: 80px;
       }
+      &.col-img {
+        width: 50px;
+      }
       &.col-inline {
         word-break: keep-all;
         word-wrap: break-word;
         white-space: nowrap;
+      }
+      &.col-action {
+        width: 80px;
       }
     }
     .col-major {

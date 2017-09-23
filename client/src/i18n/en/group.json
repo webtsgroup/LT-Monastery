@@ -1,8 +1,11 @@
 {
   "group": {
     "action": "Thao tác",
+    "add_members": "Thêm những người đã chọn vào nhóm",
+    "click_add_members": "Thêm thành viên",
     "description": "Mô tả thêm",
-    "members": "Thành viên",
-    "name": "Tên nhóm"
+    "members": "Thành viên của nhóm",
+    "name": "Tên nhóm",
+    "users": "Danh sách Thành viên/Tu sĩ"
   }
 }

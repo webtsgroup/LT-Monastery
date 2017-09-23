@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../shared/module/shared.module';
 import { UserListComponent } from './user-list.component';
 import { Routes, RouterModule } from '@angular/router';
-import { DataTableModule, CheckboxModule, ConfirmDialogModule, ConfirmationService  } from 'primeng/primeng';
+import { DataTableModule, CheckboxModule, ConfirmDialogModule, ConfirmationService, MultiSelectModule  } from 'primeng/primeng';
 
 const routes: Routes = [
   {
@@ -17,6 +17,7 @@ const routes: Routes = [
     DataTableModule,
     CheckboxModule,
     ConfirmDialogModule,
+    MultiSelectModule,
     RouterModule.forChild(routes)
   ],
   providers: [ConfirmationService],

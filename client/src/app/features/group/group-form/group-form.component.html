@@ -1,5 +1,5 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-  <app-breadcrumb></app-breadcrumb>
+  <app-breadcrumb [itemName]="metadata?.group?.name"></app-breadcrumb>
   <div class="col-sm-4">
     <div class="title-action">
       <a [routerLink]="['/events']" class="btn btn-white btn-sm btn-list">{{ 'nav.groups.list' | translate }}</a>

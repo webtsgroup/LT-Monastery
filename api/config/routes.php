@@ -53,10 +53,13 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->connect('/administrators/login', ['controller' => 'Administrators', 'action' => 'login', 'allowWithoutToken' => true]);
 
-    $routes->connect('/users/index', ['controller' => 'Users', 'action' => 'index', 'allowWithoutToken' => true]);
+    //$routes->connect('/users/index', ['controller' => 'Users', 'action' => 'index', 'allowWithoutToken' => true]);
 
-    $routes->connect('/files/upload/*', ['controller' => 'Files', 'action' => 'upload', 'allowWithoutToken' => true]);
+    //$routes->connect('/files/upload/*', ['controller' => 'Files', 'action' => 'upload', 'allowWithoutToken' => true]);
 
+    $routes->connect('/:controller/:action/*/*', ['allowWithoutToken' => true]);
+    $routes->connect('/:controller/:action/*', ['allowWithoutToken' => true]);
+    $routes->connect('/:controller/*', ['allowWithoutToken' => true]);
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */

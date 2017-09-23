@@ -14,7 +14,7 @@
           <div class="ibox-content">
             <div class="row m-b">
               <div class="col-md-4">
-                <input #search type="text" pInputText placeholder="{{ 'event.filter_by_name' | translate }}" class="form-control">
+                <input #search type="text" pInputText placeholder="{{ 'event.filter_by_name' | translate }}" class="form-control hidden">
               </div>
               <div class="col-md-8 text-right">
                 <button type="button" class="btn btn-default btn-sm btn-export" (click)="table.exportCSV()">{{ 'export.event' | translate }}</button>
@@ -30,27 +30,27 @@
                          scrollable="true"
                          sortMode="multiple">
               <!-- <p-column styleClass="col-cb" selectionMode="multiple"></p-column> -->
-              <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}">
+              <!-- <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a [routerLink]="['/events', item.id]">{{item.id}}</a>
                 </ng-template>
-              </p-column>
-              <p-column field="title" header="{{'event.title' | translate}}" [sortable]="true">
+              </p-column> -->
+              <p-column field="title" header="{{'event.title' | translate}}" [filter]="true"  filterMatchMode="contains" [sortable]="true">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a class="item-name" [routerLink]="['/events', item.id]">
                     {{item.title}}
                   </a>
                 </ng-template>
               </p-column>
-              <p-column field="location" header="{{'event.location' | translate}}"></p-column>
-              <p-column field="address" header="{{'event.address' | translate}}"></p-column>
-              <p-column field="organizer" header="{{'event.organizer' | translate}}"></p-column>
-              <p-column field="start_date" header="{{'event.start_date' | translate}}">
+              <p-column field="location" header="{{'event.location' | translate}}" [filter]="true"  filterMatchMode="contains" [sortable]="true"></p-column>
+              <p-column field="address" header="{{'event.address' | translate}}" [filter]="true"  filterMatchMode="contains" [sortable]="true"></p-column>
+              <p-column field="organizer" header="{{'event.organizer' | translate}}" [filter]="true"  filterMatchMode="contains" [sortable]="true"></p-column>
+              <p-column field="start_date" header="{{'event.start_date' | translate}}" filterMatchMode="contains" [filter]="true">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <span>{{item.start_date * 1000 | date:"dd/MM/yyyy"}}</span>
                 </ng-template>
               </p-column>
-              <p-column field="end_date" header="{{'event.end_date' | translate}}">
+              <p-column field="end_date" header="{{'event.end_date' | translate}}" [filter]="true"  filterMatchMode="contains">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <span *ngIf="item.end_date">{{item.end_date * 1000 | date:"dd/MM/yyyy"}}</span>
                 </ng-template>

@@ -37,7 +37,7 @@
               </p-column>
               <p-column field="name" header="{{'group.name' | translate}}" [sortable]="true">
                 <ng-template let-col let-item="rowData" pTemplate="body">
-                  <a class="item-name" [routerLink]="['/groups', item.id, 'update']">
+                  <a class="item-name" [routerLink]="['/groups', item.id]">
                     {{item.name}}
                   </a>
                 </ng-template>

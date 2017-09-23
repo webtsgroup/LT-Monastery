@@ -20,8 +20,7 @@ export const groupRoutes: Routes = [
           {
             path: '',
             pathMatch: 'full',
-            loadChildren: 'app/features/group/group-form/group-form.module#GroupFormModule',
-            //loadChildren: 'app/features/group/group-detail/group-detail.module#GroupDetailModule'
+            loadChildren: 'app/features/group/group-detail/group-detail.module#GroupDetailModule'
           },
           {
             path: 'update',
