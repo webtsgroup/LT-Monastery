@@ -14,6 +14,7 @@ import { ImagePipe } from '../pipe/image/image.pipe';
 import { HtmlPipe } from '../pipe/html/html.pipe';
 import { BreadcrumbModule } from '../layout/breadcrumb/breadcrumb.module';
 import { PermissionDirective } from '../../core/directive/permission.directive';
+import { DropdownPipe } from '../pipe/dropdown/dropdown.pipe';
 
 const AUTH_PROVIDERS = [
   AuthService,
@@ -29,8 +30,8 @@ const AUTH_PROVIDERS = [
     TranslateModule,
     BreadcrumbModule
   ],
-  declarations: [LoadingDirective, EmptyDataDirective, ImagePipe, HtmlPipe, PermissionDirective],
+  declarations: [LoadingDirective, EmptyDataDirective, ImagePipe, HtmlPipe, PermissionDirective, DropdownPipe],
   providers: [I18N_PROVIDERS, API_PROVIDERS, AUTH_PROVIDERS],
-  exports: [LoadingDirective, EmptyDataDirective, BreadcrumbModule, RouterModule, TranslateModule, CommonModule, FormsModule, ImagePipe, HtmlPipe, PermissionDirective]
+  exports: [LoadingDirective, EmptyDataDirective, BreadcrumbModule, RouterModule, TranslateModule, CommonModule, FormsModule, ImagePipe, HtmlPipe, PermissionDirective, DropdownPipe]
 })
 export class SharedModule { }

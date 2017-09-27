@@ -32,7 +32,7 @@ export class EmptyDataDirective implements OnInit {
       //setting class name is text-na
       this.renderer.setElementClass(insteadElm, 'text-na', true);
       //setting content for it
-      this.renderer.createText(insteadElm, 'Empty');
+      this.renderer.createText(insteadElm, 'Chưa có thông tin');
       //append new above current element
       this.el.nativeElement.parentNode.insertBefore(insteadElm, this.el.nativeElement);
       //delete current element

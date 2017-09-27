@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../shared/module/shared.module';
 import { GroupDetailComponent } from './group-detail.component';
 import { Routes, RouterModule } from '@angular/router';
-import { DataTableModule, CheckboxModule, ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
+import { DataTableModule, CheckboxModule, ConfirmDialogModule, ConfirmationService, DropdownModule } from 'primeng/primeng';
 
 const routes: Routes = [
   {
@@ -16,6 +16,7 @@ const routes: Routes = [
     SharedModule,
     DataTableModule,
     ConfirmDialogModule,
+    DropdownModule,
     RouterModule.forChild(routes)
   ],
   providers: [ConfirmationService],

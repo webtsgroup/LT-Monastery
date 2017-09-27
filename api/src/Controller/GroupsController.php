@@ -88,7 +88,17 @@ class GroupsController extends ApiController
       $members = $userGroupTable->find('all')->select(['user_id'])->where(['group_id' => $group_id])->toArray();
       $members = Hash::extract($members, '{n}.user_id');
       $userTable = TableRegistry::get('Users');
-      $result = $userTable->find('all')->where(['id NOT IN' => $members])->toArray();
+      if ($members && count($members)) {
+        $result = $userTable->find('all')->where(['Users.id NOT IN' => $members])->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
+            $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+            return $row;
+        })->toArray();
+      } else {
+        $result = $userTable->find('all')->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
+            $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+            return $row;
+        })->toArray();
+      }
       $this->apiResponse = $result;
     }
 

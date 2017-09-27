@@ -18,11 +18,15 @@
             <div class="row">
               <div class="col-md-6">
                 <h1><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;{{result?.member_count?.internal}}</h1>
-                <a [routerLink]="['/users', 'internal']">{{ 'report.user.internal' | translate }}</a>
+                <a [permission]="['users_internal', 'view', true]" [routerLink]="['/users', 'internal']">
+                  <span>{{ 'report.user.internal' | translate }}</span>
+                </a>
               </div>
               <div class="col-md-6">
                 <h1><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{result?.member_count?.external}}</h1>
-                <a [routerLink]="['/users', 'internal']">{{ 'report.user.external' | translate }}</a>
+                <a [permission]="['users_external', 'view', true]" [routerLink]="['/users', 'external']">
+                  <span>{{ 'report.user.external' | translate }}</span>
+                </a>
               </div>
             </div>
           </div>
@@ -33,12 +37,12 @@
           <div class="ibox-content">
             <div class="feed-activity-list">
               <div class="feed-element" *ngFor="let item of result?.birthday?.this_month">
-                <a [routerLink]="['/users', item.is_internal == 1 ? 'internal' : 'external', item.id]" class="pull-left">
-                  <img alt="image" class="img-circle" src="{{ item.avatar | image:'user' }}">
+                <a [permission]="['users_' + item.user_type, 'r']" [routerLink]="['/users', item.user_type, item.id]" class="pull-left">
+                  <img class="pull-left" alt="image" class="img-circle pull-left" src="{{ item.avatar | image:'user' }}">
                 </a>
                 <div class="media-body ">
                   <!-- <small class="pull-right">5m ago</small> -->
-                  <strong><a [routerLink]="['/users', item.is_internal == 1 ? 'internal' : 'external', item.id]">{{item.fullname}}</a></strong><br>
+                  <strong><a [permission]="['users_' + item.user_type, 'r']" [routerLink]="['/users', item.user_type, item.id]">{{item.fullname}}</a></strong><br>
                   <small class="text-muted">
                     <i class="fa fa-calendar"></i>&nbsp;&nbsp;
                     {{item.birthday * 1000 | date:'dd/MM/yyyy'}}
@@ -55,12 +59,12 @@
           <div class="ibox-content">
             <div class="feed-activity-list">
               <div class="feed-element" *ngFor="let item of result?.birthday?.next_month">
-                <a [routerLink]="['/users', item.is_internal == 1 ? 'internal' : 'external', item.id]" class="pull-left">
-                  <img alt="image" class="img-circle" src="{{ item.avatar | image:'user' }}">
+                <a [permission]="['users_' + item.user_type, 'r']" [routerLink]="['/users', item.user_type, item.id]" class="pull-left">
+                  <img class="pull-left" alt="image" class="img-circle pull-left" src="{{ item.avatar | image:'user' }}">
                 </a>
                 <div class="media-body ">
                   <!-- <small class="pull-right">5m ago</small> -->
-                  <strong><a [routerLink]="['/users', item.is_internal == 1 ? 'internal' : 'external', item.id]">{{item.fullname}}</a></strong><br>
+                  <strong><a [permission]="['users_' + item.user_type, 'r']" [routerLink]="['/users', item.user_type, item.id]">{{item.fullname}}</a></strong><br>
                   <small class="text-muted">
                     <i class="fa fa-calendar"></i>&nbsp;&nbsp;
                     {{item.birthday * 1000 | date:'dd/MM/yyyy'}}

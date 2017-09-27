@@ -29,12 +29,20 @@ class DashboardController extends ApiController
       $result['birthday']['this_month'] = $userTable->find()
                                           ->where([
                                             'MONTH(FROM_UNIXTIME(birthday))' => $thisMonth
-                                          ])->order(['birthday' => 'ASC'])->toArray();
+                                          ])->order(['birthday' => 'ASC'])
+                                          ->map(function ($row) { // map() is a collection method, it executes the query
+                                              $row->user_type = $row->is_internal == 1 ? 'internal' : 'external';
+                                              return $row;
+                                          })->toArray();
       $nextMonth = date('m', strtotime('+1 month', $NOW));
       $result['birthday']['next_month'] = $userTable->find()
                                           ->where([
                                             'MONTH(FROM_UNIXTIME(birthday))' => $nextMonth
-                                          ])->order(['birthday' => 'ASC'])->toArray();
+                                          ])->order(['birthday' => 'ASC'])
+                                          ->map(function ($row) { // map() is a collection method, it executes the query
+                                              $row->user_type = $row->is_internal == 1 ? 'internal' : 'external';
+                                              return $row;
+                                          })->toArray();
 
       $eventTable = TableRegistry::get('Events');
       $result['events'] = $eventTable->find()->where(['start_date > ' => $NOW])->order(['start_date' => 'ASC'])->toArray();

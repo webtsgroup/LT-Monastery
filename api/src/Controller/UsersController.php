@@ -17,9 +17,16 @@ class UsersController extends ApiController
     {
         $isInternal = $type === 'internal' ? 1 : 0;
         $this->request->allowMethod('get');
-        $result = $this->Users->find('all')->where(['is_internal' => $isInternal])->contain(['Avatar'])->toArray();
+        $result = $this->Users->find('all')
+        ->where(['is_internal' => $isInternal])
+        ->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])
+        ->map(function ($row) { // map() is a collection method, it executes the query
+            $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+            return $row;
+        })->toArray();
         //debug($this->Users->find('all')->contain(['Events']));
-        $this->apiResponse = $result;
+        $this->apiResponse['users'] = $result;
+        $this->getMetadata();
     }
 
     public function view($id, $pageUpdate = 0)

@@ -30,6 +30,13 @@ export class PermissionDirective implements OnInit {
         }
         this.el.nativeElement.parentNode.insertBefore(firstChild, this.el.nativeElement);
         this.el.nativeElement.remove();
+      } else if (this.permission[1] === 'view' && this.permission[2]) {
+        let firstChild = this.el.nativeElement.firstElementChild;
+        if (firstChild === null) {
+          firstChild = this.el.nativeElement.firstChild;
+        }
+        this.el.nativeElement.parentNode.insertBefore(firstChild, this.el.nativeElement);
+        this.el.nativeElement.remove();
       } else if (this.el.nativeElement.tagName === 'BUTTON') {
         this.el.nativeElement.disabled = true;
         //

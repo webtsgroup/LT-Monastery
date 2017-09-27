@@ -460,3 +460,34 @@ a {
     color: $navy;
   }
 }
+/*
+th,
+td {
+  &.facebook,
+  &.province,
+  &.district,
+  &.address,
+  &.email,
+  &.facebook,
+  &.facebook {
+    width: 180px !important;
+  }
+}
+*/
+.page-user {
+  th,
+  td {
+    &:not(.col-img),
+    &:not(.col-action) {
+      width: 120px !important;
+    }
+  }
+  th,
+  td {
+    &.job,
+    &.province,
+    &.district{
+      width: 180px !important;
+    }
+  }
+}

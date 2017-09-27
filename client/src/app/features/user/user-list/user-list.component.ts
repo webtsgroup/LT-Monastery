@@ -16,6 +16,7 @@ export class UserListComponent implements OnInit {
   selectedItems: Array<any>;
   columnOptions: any;
   cols: any[];
+  metadata: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class UserListComponent implements OnInit {
     this.isInit = true;
     this.result = [];
     this.selectedItems = [];
+    this.metadata = {};
   }
 
   ngOnInit() {
@@ -34,8 +36,11 @@ export class UserListComponent implements OnInit {
       { field: 'phone', header: 'SDT' },
       { field: 'email', header: 'Email' },
       { field: 'facebook', header: 'Facebook' },
+      { field: 'province', header: 'Tỉnh/TP' },
+      { field: 'district', header: 'Quận/Huyện' },
       { field: 'address', header: 'Địa chỉ' },
-      { field: 'birthday', header: 'Ngày sinh' }
+      { field: 'birthday', header: 'Ngày sinh' },
+      { field: 'job', header: 'Nghề nghiệp' }
     ];
 
     this.columnOptions = [];
@@ -53,7 +58,13 @@ export class UserListComponent implements OnInit {
   fetchData() {
     this.api.get(['users', 'index', this.userType]).subscribe(
       (data: any) => {
-        this.result = data.result || [];
+        this.result = data.result.users || [];
+        this.metadata.provinces = data.result.provinces || [];
+
+        this.metadata.jobs = data.result.jobs || [];
+
+        this.metadata.districts = data.result.districts || [];
+
       }, (err) => {
         //
       }, () => {

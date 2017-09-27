@@ -15,6 +15,8 @@ export class GroupDetailComponent implements OnInit {
   selectedItems: any;
   users: any;
   hasUsers: boolean;
+  cols: any;
+  columnOptions: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +30,22 @@ export class GroupDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cols = [
+      { field: 'barcode', header: 'Barcode' },
+      //{ field: 'phone', header: 'SDT' },
+      //{ field: 'email', header: 'Email' },
+      //{ field: 'facebook', header: 'Facebook' },
+      { field: 'province', header: 'Tỉnh/TP' },
+      { field: 'district', header: 'Quận/Huyện' },
+      //{ field: 'address', header: 'Địa chỉ' },
+      { field: 'birthday', header: 'Ngày sinh' },
+      { field: 'job', header: 'Nghề nghiệp' }
+    ];
+
+    this.columnOptions = [];
+    for(let i = 0; i < this.cols.length; i++) {
+        this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
+    }
     this.route.params.subscribe(params => {
       if (params.id) {
         this.itemId = +params.id;
@@ -70,6 +88,7 @@ export class GroupDetailComponent implements OnInit {
       (data: any) => {
         this.users = data.result || [];
       }, (err) => {
+        this.users = [];
         //
       }, () => {
         this.isInit = false;

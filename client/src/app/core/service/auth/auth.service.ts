@@ -7,7 +7,8 @@ import 'rxjs/add/observable/of';
 
 
 const FEATURES: any = {
-  users: ['c', 'r', 'u', 'd', 'view', 'filter', 'export'],
+  users_external: ['c', 'r', 'u', 'd', 'view', 'filter', 'export'],
+  users_internal: ['c', 'r', 'u', 'd', 'view', 'filter', 'export'],
   events: ['c', 'r', 'u', 'd', 'view', 'filter', 'export'],
   administrators: ['c', 'r', 'u', 'd', 'view'],
   groups: ['c', 'r', 'u', 'd', 'view']
@@ -23,8 +24,18 @@ const MIX = function() {
       PERMISSIONS[role][key] = {};
       for (let action of FEATURES[key]) {
         let allow: number = 1;
-        if (role !== 'admin') {
-          if (key === 'administrators') {
+        // if (role !== 'admin') {
+        //   if (key === 'administrators') {
+        //     allow = 0;
+        //   }
+        // }
+        if (role === 'input') {
+          if (key !== 'users_external') {
+            allow = 0;
+          }
+        }
+        if (role === 'editor') {
+          if ('events' !== key && 'users_internal' !== key && key != 'users_external') {
             allow = 0;
           }
         }
@@ -76,9 +87,13 @@ export class AuthService {
   }
 
   getUserInfo() {
-    let token = localStorage.getItem('token');
-    let userInfo = this.jwtHelper.decodeToken(token);
-    return userInfo || {};
+    if (this.isTokenInvalid()) {
+      return {};
+    } else {
+      let token = localStorage.getItem('token');
+      let userInfo = this.jwtHelper.decodeToken(token);
+      return userInfo || {};
+    }
     // console.log(
     //   this.jwtHelper.decodeToken(token),
     //   this.jwtHelper.getTokenExpirationDate(token),
@@ -121,7 +136,11 @@ export class AuthService {
 
   checkPermission(feature: string, action: string) {
     const role = this.getUserInfo().role.code;
-    return PERMISSIONS[role][feature][action] === 1 ? true : false;
+    if (PERMISSIONS[role][feature]) {
+      return PERMISSIONS[role][feature][action] === 1 ? true : false;
+    } else {
+      return true;
+    }
   }
 
 }

@@ -47,7 +47,7 @@ export class GroupFormComponent implements OnInit {
   initForm() {
   	this.form = this.fb.group({
   		name: ['', Validators.required],
-      users: '',
+      //users: '',
       description: '',
   	});
   }

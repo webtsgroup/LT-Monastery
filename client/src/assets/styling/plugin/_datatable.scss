@@ -168,7 +168,8 @@
     }
   }
   /* style for scroll table*/
-  &.ui-datatable-scrollable {
+  &.ui-datatable-scrollable,
+  &.ui-datatable-reflow {
     .ui-datatable-scrollable-header-box {
       .table {
         margin-bottom: 0;
@@ -182,10 +183,10 @@
     td {
       width: auto;
       &.col-sysid {
-        width: 80px;
+        width: 80px !important;
       }
       &.col-img {
-        width: 50px;
+        width: 50px !important;
       }
       &.col-inline {
         word-break: keep-all;
@@ -193,7 +194,7 @@
         white-space: nowrap;
       }
       &.col-action {
-        width: 80px;
+        width: 80px !important;
       }
     }
     .col-major {

@@ -50,10 +50,53 @@
                     </a>
                   </ng-template>
                 </p-column>
+                <!-- <p-column field="is_internal" header="{{'user.internal' | translate}}" [sortable]="true" filter="true" filterMatchMode="contains">
+                  <ng-template let-col let-item="rowData" pTemplate="body">
+                    <div *ngIf="item.is_internal == 1" class="text-success text-center"><i class="fa fa-check" aria-hidden="true"></i></div>
+                  </ng-template>
+                </p-column> -->
                 <p-column field="code" header="{{'user.code' | translate}}" filter="true" filterMatchMode="contains"></p-column>
-                <p-column field="phone" header="{{'user.phone' | translate}}" filter="true" filterMatchMode="contains"></p-column>
+                <!-- <p-column field="phone" header="{{'user.phone' | translate}}" filter="true" filterMatchMode="contains"></p-column>
                 <p-column field="email" header="{{'user.email' | translate}}" filter="true" filterMatchMode="contains"></p-column>
-                <p-column field="barcode" header="{{'user.barcode' | translate}}" filter="true" filterMatchMode="contains"></p-column>
+                <p-column field="barcode" header="{{'user.barcode' | translate}}" filter="true" filterMatchMode="contains"></p-column> -->
+                <p-column *ngFor="let col of cols" styleClass="{{col.field}}" [field]="col.field" [header]="col.header" [filter]="true" filterMatchMode="contains" [sortable]="true">
+                  <ng-template [ngIf]="col.field === 'job'">
+                    <ng-template pTemplate="filter" let-col>
+                      <p-dropdown [options]="( metadata.jobs | dropdown:'name' )"
+                      [style]="{'width':'100%'}"
+                      (onChange)="table.filter($event.value,col.field,col.filterMatchMode)"
+                      styleClass="ui-column-filter">
+                    </p-dropdown>
+                  </ng-template>
+                  <ng-template let-item="rowData" pTemplate="body">
+                    {{item?.job?.name}}
+                  </ng-template>
+                </ng-template>
+                <ng-template [ngIf]="col.field === 'province'">
+                  <!-- <ng-template pTemplate="filter" let-col>
+                    <p-dropdown [options]="( metadata.provinces | dropdown:'name' )"
+                    [style]="{'width':'100%'}"
+                    (onChange)="table.filter($event.value,col.field,col.filterMatchMode)"
+                    styleClass="ui-column-filter">
+                  </p-dropdown>
+                </ng-template> -->
+                <ng-template let-item="rowData" pTemplate="body">
+                  {{item?.province?.name}}
+                </ng-template>
+              </ng-template>
+              <ng-template [ngIf]="col.field === 'district'">
+                <!-- <ng-template pTemplate="filter" let-col>
+                  <p-dropdown [options]="( metadata.districts | dropdown:'name' )"
+                  [style]="{'width':'100%'}"
+                  (onChange)="table.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter">
+                </p-dropdown>
+              </ng-template> -->
+              <ng-template let-item="rowData" pTemplate="body">
+                {{item?.district?.name}}
+              </ng-template>
+            </ng-template>
+              </p-column>
               </p-dataTable>
               <button style="margin-top: -60px; position: relative;" [disabled]="!selectedItems.length" type="button" class="btn btn-default btn-sm btn-add" (click)="addToGroup()" name="button">{{ 'group.add_members' | translate }}</button>
               </ng-template>

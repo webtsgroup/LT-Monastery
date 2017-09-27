@@ -28,11 +28,11 @@
 true}">
         <a [routerLink]="['/']"><i class="fa fa-home"></i> <span class="nav-label">{{ 'nav.dashboard' | translate }}</span></a>
       </li>
-      <li [permission]="['users', 'view']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+      <li [permission]="['users_external', 'view']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
 true}">
         <a [routerLink]="['/users', 'external']"><i class="fa fa-user-circle"></i> <span class="nav-label">{{ 'nav.users.external.module' | translate }}</span></a>
       </li>
-      <li [permission]="['users', 'view']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+      <li [permission]="['users_internal', 'view']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
 true}">
         <a [routerLink]="['/users', 'internal']"><i class="fa fa-user-circle-o"></i> <span class="nav-label">{{ 'nav.users.internal.module' | translate }}</span></a>
       </li>

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from '../../core/service/auth/auth-guard';
 
 export const userRoutes: Routes = [
   {
@@ -7,7 +8,7 @@ export const userRoutes: Routes = [
     children: [
       {
         path: ':slug',
-        data: { isMod: true, withoutComp: true },
+        data: { isMod: true, withoutComp: true, mod: 'users_:slug',  },
         children: [
           {
             path: '',
