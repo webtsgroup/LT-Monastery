@@ -60,17 +60,22 @@
                 <p-column field="email" header="{{'user.email' | translate}}" filter="true" filterMatchMode="contains"></p-column>
                 <p-column field="barcode" header="{{'user.barcode' | translate}}" filter="true" filterMatchMode="contains"></p-column> -->
                 <p-column *ngFor="let col of cols" styleClass="{{col.field}}" [field]="col.field" [header]="col.header" [filter]="true" filterMatchMode="contains" [sortable]="true">
+                  <ng-template [ngIf]="col.field === 'facebook'">
+                    <ng-template let-item="rowData" pTemplate="body">
+                      <a href="{{item?.facebook}}" target="_blank">{{item?.facebook}}</a>
+                    </ng-template>
+                  </ng-template>
                   <ng-template [ngIf]="col.field === 'job'">
-                    <ng-template pTemplate="filter" let-col>
+                    <!-- <ng-template pTemplate="filter" let-col>
                       <p-dropdown [options]="( metadata.jobs | dropdown:'name' )"
                       [style]="{'width':'100%'}"
                       (onChange)="table.filter($event.value,col.field,col.filterMatchMode)"
                       styleClass="ui-column-filter">
                     </p-dropdown>
-                  </ng-template>
-                  <ng-template let-item="rowData" pTemplate="body">
+                  </ng-template> -->
+                  <!-- <ng-template let-item="rowData" pTemplate="body">
                     {{item?.job?.name}}
-                  </ng-template>
+                  </ng-template> -->
                 </ng-template>
                 <ng-template [ngIf]="col.field === 'province'">
                   <!-- <ng-template pTemplate="filter" let-col>
@@ -80,9 +85,9 @@
                     styleClass="ui-column-filter">
                   </p-dropdown>
                 </ng-template> -->
-                <ng-template let-item="rowData" pTemplate="body">
+                <!-- <ng-template let-item="rowData" pTemplate="body">
                   {{item?.province?.name}}
-                </ng-template>
+                </ng-template> -->
               </ng-template>
               <ng-template [ngIf]="col.field === 'district'">
                 <!-- <ng-template pTemplate="filter" let-col>
@@ -92,9 +97,9 @@
                   styleClass="ui-column-filter">
                 </p-dropdown>
               </ng-template> -->
-              <ng-template let-item="rowData" pTemplate="body">
+              <!-- <ng-template let-item="rowData" pTemplate="body">
                 {{item?.district?.name}}
-              </ng-template>
+              </ng-template> -->
             </ng-template>
               </p-column>
               </p-dataTable>

@@ -37,6 +37,7 @@ class GroupsController extends ApiController
         // }
         $this->apiResponse['group'] = $group;
         $this->getMetadata();
+        //$this->getListSelect();
     }
 
     public function getMetadata()
@@ -91,15 +92,36 @@ class GroupsController extends ApiController
       if ($members && count($members)) {
         $result = $userTable->find('all')->where(['Users.id NOT IN' => $members])->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
             $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+            $row->job = $row->job ? $row->job['name'] : '';
+            $row->province = $row->province ? $row->province['name'] : '';
+            $row->district = $row->district ? $row->district['name'] : '';
             return $row;
         })->toArray();
       } else {
         $result = $userTable->find('all')->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
             $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+            $row->job = $row->job ? $row->job['name'] : '';
+            $row->province = $row->province ? $row->province['name'] : '';
+            $row->district = $row->district ? $row->district['name'] : '';
             return $row;
         })->toArray();
       }
       $this->apiResponse = $result;
+    }
+
+    public function getListSelect()
+    {
+      $provinceTable = TableRegistry::get('Provinces');
+      $provinces = $provinceTable->find('all')->toArray();
+      $this->apiResponse['provinces'] = $provinces;
+
+      $jobTable = TableRegistry::get('Jobs');
+      $jobs = $jobTable->find('all')->toArray();
+      $this->apiResponse['jobs'] = $jobs;
+
+      $districtTable = TableRegistry::get('Districts');
+      $districts = $districtTable->find('all')->toArray();
+      $this->apiResponse['districts'] = $districts;
     }
 
     public function pushMembers($group_id) {

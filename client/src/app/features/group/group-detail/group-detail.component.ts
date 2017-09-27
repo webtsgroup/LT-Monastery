@@ -17,6 +17,7 @@ export class GroupDetailComponent implements OnInit {
   hasUsers: boolean;
   cols: any;
   columnOptions: any;
+  metadata: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class GroupDetailComponent implements OnInit {
     this.detail = {};
     this.isInit = true;
     this.selectedItems = [];
+    this.metadata = {};
   }
 
   ngOnInit() {
@@ -58,6 +60,9 @@ export class GroupDetailComponent implements OnInit {
     this.api.get(['groups', 'view', this.itemId, 0]).subscribe(
       (data: any) => {
         this.detail = data.result.group || {};
+        this.metadata.jobs = data.result.jobs || [];
+        this.metadata.provinces = data.result.provinces || [];
+        this.metadata.districts = data.result.districts || [];
       }, (err) => {
         //
       }, () => {
@@ -75,8 +80,10 @@ export class GroupDetailComponent implements OnInit {
       (data: any) => {
         this.detail = data.result.group || {};
       }, (err) => {
+        this.selectedItems = [];
         this.hasUsers = false;
       }, () => {
+        this.selectedItems = [];
         this.isInit = false;
         this.hasUsers = false;
       }

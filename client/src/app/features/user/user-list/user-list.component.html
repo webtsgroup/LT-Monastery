@@ -89,9 +89,9 @@
                 styleClass="ui-column-filter">
               </p-dropdown>
             </ng-template> -->
-            <ng-template let-item="rowData" pTemplate="body">
+            <!-- <ng-template let-item="rowData" pTemplate="body">
               {{item?.job?.name}}
-            </ng-template>
+            </ng-template> -->
           </ng-template>
           <ng-template [ngIf]="col.field === 'province'">
             <!-- <ng-template pTemplate="filter" let-col>
@@ -101,9 +101,9 @@
               styleClass="ui-column-filter">
             </p-dropdown>
           </ng-template> -->
-          <ng-template let-item="rowData" pTemplate="body">
+          <!-- <ng-template let-item="rowData" pTemplate="body">
             {{item?.province?.name}}
-          </ng-template>
+          </ng-template> -->
         </ng-template>
         <ng-template [ngIf]="col.field === 'district'">
           <!-- <ng-template pTemplate="filter" let-col>
@@ -113,9 +113,9 @@
             styleClass="ui-column-filter">
           </p-dropdown>
         </ng-template> -->
-        <ng-template let-item="rowData" pTemplate="body">
+        <!-- <ng-template let-item="rowData" pTemplate="body">
           {{item?.district?.name}}
-        </ng-template>
+        </ng-template> -->
       </ng-template>
         </p-column>
         <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'user.action' | translate }}">

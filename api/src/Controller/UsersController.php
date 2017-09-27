@@ -22,6 +22,9 @@ class UsersController extends ApiController
         ->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])
         ->map(function ($row) { // map() is a collection method, it executes the query
             $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+            $row->job = $row->job ? $row->job['name'] : '';
+            $row->province = $row->province ? $row->province['name'] : '';
+            $row->district = $row->district ? $row->district['name'] : '';
             return $row;
         })->toArray();
         //debug($this->Users->find('all')->contain(['Events']));
