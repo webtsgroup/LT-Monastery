@@ -45,8 +45,12 @@ export class UserListComponent implements OnInit {
 
     this.columnOptions = [];
     for(let i = 0; i < this.cols.length; i++) {
-        this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
+      this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
     }
+    const hiddenField = ['facebook', 'province', 'district', 'address'];
+    this.cols = this.cols.filter((obj: any) => {
+      return !hiddenField.includes(obj.field);
+    });
     this.route.params.subscribe(params => {
       if (params.slug) {
         this.userType = params.slug;

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://quanly.tuvienlinhthuu.org/api'
+  apiBaseUrl: 'http://phapthihoi.vn/linhthuu/api'
 };
