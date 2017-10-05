@@ -36,6 +36,7 @@ export class UserListComponent implements OnInit {
       { field: 'phone', header: 'SDT' },
       { field: 'email', header: 'Email' },
       { field: 'facebook', header: 'Facebook' },
+      //{ field: 'group', header: 'Nhóm' },
       { field: 'province', header: 'Tỉnh/TP' },
       { field: 'district', header: 'Quận/Huyện' },
       { field: 'address', header: 'Địa chỉ' },

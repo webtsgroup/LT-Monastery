@@ -37,10 +37,10 @@ class UsersTable extends Table
           'className' => 'Districts',
           'foreignKey' => 'district_id'
         ]);
-        $this->belongsTo('Groups', [
-          'className' => 'Groups',
-          'foreignKey' => 'group_id'
-        ]);
+        // $this->belongsTo('Groups', [
+        //   'className' => 'Groups',
+        //   'foreignKey' => 'group_id'
+        // ]);
         $this->hasOne('Avatar', [
           'className' => 'Files',
           'propertyName' => 'avatar',

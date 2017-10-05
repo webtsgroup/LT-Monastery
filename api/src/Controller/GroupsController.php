@@ -26,9 +26,10 @@ class GroupsController extends ApiController
         $this->request->allowMethod('get');
         $group = $this->Groups->get($id, [
           'contain' => [
-            'Users'
+            'Users',
+            'Users.Avatar'
             // 'Users' => function ($q) {
-            //       return $q->autoFields(false)->select(['id', 'fullname', 'avatar']);
+            //   return $q->autoFields(false)->contain(['Avatar']);
             // }
           ]
         ]);
@@ -84,28 +85,46 @@ class GroupsController extends ApiController
       $this->apiResponse = $result;
     }
 
-    public function usersExcludeMembers($group_id) {
+    public function usersExcludeMembers($group_id, $type) {
       $userGroupTable = TableRegistry::get('GroupsUsers');
       $members = $userGroupTable->find('all')->select(['user_id'])->where(['group_id' => $group_id])->toArray();
       $members = Hash::extract($members, '{n}.user_id');
       $userTable = TableRegistry::get('Users');
-      if ($members && count($members)) {
-        $result = $userTable->find('all')->where(['Users.id NOT IN' => $members])->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
-            $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
-            $row->job = $row->job ? $row->job['name'] : '';
-            $row->province = $row->province ? $row->province['name'] : '';
-            $row->district = $row->district ? $row->district['name'] : '';
-            return $row;
-        })->toArray();
+      $where = [
+        'Users.fullname !=' => ''
+      ];
+      if ($type === 'all') {
+        //
       } else {
-        $result = $userTable->find('all')->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
-            $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
-            $row->job = $row->job ? $row->job['name'] : '';
-            $row->province = $row->province ? $row->province['name'] : '';
-            $row->district = $row->district ? $row->district['name'] : '';
-            return $row;
-        })->toArray();
+        array_push($where, array('Users.is_internal' => $type === 'internal' ? 1 : 0));
       }
+      if ($members && count($members)) {
+        array_push($where, array('Users.id NOT IN' => $members));
+      }
+      $result = $userTable->find('all')->where($where)->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
+          $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+          $row->job = $row->job ? $row->job['name'] : '';
+          $row->province = $row->province ? $row->province['name'] : '';
+          $row->district = $row->district ? $row->district['name'] : '';
+          return $row;
+      })->toArray();
+      // if ($members && count($members)) {
+      //   $result = $userTable->find('all')->where(['Users.id NOT IN' => $members])->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
+      //       $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+      //       $row->job = $row->job ? $row->job['name'] : '';
+      //       $row->province = $row->province ? $row->province['name'] : '';
+      //       $row->district = $row->district ? $row->district['name'] : '';
+      //       return $row;
+      //   })->toArray();
+      // } else {
+      //   $result = $userTable->find('all')->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])->map(function ($row) { // map() is a collection method, it executes the query
+      //       $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+      //       $row->job = $row->job ? $row->job['name'] : '';
+      //       $row->province = $row->province ? $row->province['name'] : '';
+      //       $row->district = $row->district ? $row->district['name'] : '';
+      //       return $row;
+      //   })->toArray();
+      // }
       $this->apiResponse = $result;
     }
 

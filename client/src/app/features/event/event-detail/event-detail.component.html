@@ -15,7 +15,69 @@
       <div class="col-md-8 col-left" style="width: 70%">
         <div class="ibox">
           <div class="ibox-content main-content">
-            <h2 class="m-b-lg">{{ 'event.members' | translate }}</h2>
+            <div class="m-b">
+              <div class="">
+                <span class="radio radio-inline radio-info" *ngFor="let item of ['all', 'internal', 'external']">
+                  <input type="radio" id="{{item}}" [value]="item" [(ngModel)]="type">
+                  <label [attr.for]="item">{{ 'event.choose_' + item | translate }}</label>
+                </span>
+                <button type="button" class="btn btn-default btn-sm btn-add m-l" (click)="showBox()" name="button">{{ 'event.click_add' | translate }}</button>
+              </div>
+              <ng-template [ngIf]="hasUsers">
+              <div class="row m-t m-b-xs">
+                <div class="col-md-4">
+                  <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+                </div>
+              </div>
+              <!-- <h2 class="m-b-xs">{{ 'group.users' | translate }}</h2> -->
+              <p-dataTable #table
+                           [value]="users"
+                           [rows]="10"
+                           [paginator]="true"
+                           [editable]="true"
+                           [globalFilter]="search"
+                           (onFilter)="onFilter()"
+                           [(selection)]="selectedItems"
+                           scrollable="true"
+                           sortMode="multiple">
+                <p-column styleClass="col-cb" selectionMode="multiple"></p-column>
+                <p-column styleClass="col-img" field="avatar" header="">
+                  <ng-template let-col let-item="rowData" pTemplate="body">
+                    <a [routerLink]="['/users', item.id]">
+                      <img alt="image" class="img-circle avatar-sm" src="{{ item?.avatar?.file | image:'user':item?.avatar?.dir }}">
+                    </a>
+                  </ng-template>
+                </p-column>
+                <p-column field="fullname" header="{{'user.fullname' | translate}}" [sortable]="true" filter="true" filterMatchMode="contains">
+                  <ng-template let-col let-item="rowData" pTemplate="body">
+                    <a class="item-name" [routerLink]="['/users', item?.is_internal == 1 ? 'internal' : 'external', item.id]">
+                      {{item.fullname}}
+                    </a>
+                  </ng-template>
+                </p-column>
+                <!-- <p-column field="is_internal" header="{{'user.internal' | translate}}" [sortable]="true" filter="true" filterMatchMode="contains">
+                  <ng-template let-col let-item="rowData" pTemplate="body">
+                    <div *ngIf="item.is_internal == 1" class="text-success text-center"><i class="fa fa-check" aria-hidden="true"></i></div>
+                  </ng-template>
+                </p-column> -->
+                <p-column field="code" header="{{'user.code' | translate}}" filter="true" filterMatchMode="contains"></p-column>
+                <!-- <p-column field="phone" header="{{'user.phone' | translate}}" filter="true" filterMatchMode="contains"></p-column>
+                <p-column field="email" header="{{'user.email' | translate}}" filter="true" filterMatchMode="contains"></p-column>
+                <p-column field="barcode" header="{{'user.barcode' | translate}}" filter="true" filterMatchMode="contains"></p-column> -->
+                <p-column *ngFor="let col of cols" styleClass="{{col.field}}" [field]="col.field" [header]="col.header" [filter]="true" filterMatchMode="contains" [sortable]="true">
+                  <ng-template [ngIf]="col.field === 'facebook'">
+                    <ng-template let-item="rowData" pTemplate="body">
+                      <a href="{{item?.facebook}}" target="_blank">{{item?.facebook}}</a>
+                    </ng-template>
+                  </ng-template>
+              </p-column>
+              </p-dataTable>
+              <button style="margin-top: -60px; position: relative;" [disabled]="!selectedItems.length" type="button" class="btn btn-default btn-sm btn-add" (click)="addToGroup()" name="button">{{ 'group.add_members' | translate }}</button>
+              <button style="margin-top: -60px; position: relative;" type="button" class="btn btn-default btn-sm btn-cancel" (click)="closeBox()" name="button">Đóng</button>
+              </ng-template>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <h2 class="m-b">{{ 'event.members' | translate }}</h2>
             <p-dataTable #table
                          [value]="detail?.users"
                          [rows]="20"
@@ -30,6 +92,13 @@
                   <a [routerLink]="['/users', item.id]">{{item.id}}</a>
                 </ng-template>
               </p-column> -->
+              <p-column styleClass="col-img" field="avatar" header="">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <a [routerLink]="['/users', item.id]">
+                    <img alt="image" class="img-circle avatar-sm" src="{{ item?.avatar?.file | image:'user':item?.avatar?.dir }}">
+                  </a>
+                </ng-template>
+              </p-column>
               <p-column field="fullname" header="{{'user.fullname' | translate}}" [sortable]="true">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <a class="item-name" [routerLink]="['/users', item?.is_internal == 1 ? 'internal' : 'external', item.id]">
@@ -38,16 +107,14 @@
                 </ng-template>
               </p-column>
               <p-column field="code" header="{{'user.code' | translate}}"></p-column>
-              <p-column styleClass="col-sysid" field="avatar" header="{{'user.avatar' | translate}}">
-                <ng-template let-col let-item="rowData" pTemplate="body">
-                  <a [routerLink]="['/users', item.id]">
-                    <img alt="image" class="img-circle avatar-sm" src="{{ item?.avatar?.file | image:'user':item?.avatar?.dir }}">
-                  </a>
-                </ng-template>
-              </p-column>
               <p-column field="phone" header="{{'user.phone' | translate}}"></p-column>
               <p-column field="email" header="{{'user.email' | translate}}"></p-column>
               <p-column field="barcode" header="{{'user.barcode' | translate}}"></p-column>
+              <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'user.action' | translate }}">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <button (click)="delete(item[col.field])" class="delete"></button>
+                </ng-template>
+              </p-column>
             </p-dataTable>
           </div>
         </div>
@@ -93,3 +160,4 @@
     </div>
   </ng-template>
 </div>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>

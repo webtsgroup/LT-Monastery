@@ -5,6 +5,7 @@ namespace App\Controller;
 use RestApi\Controller\ApiController;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
+use Cake\Utility\Hash;
 
 /**
  * Account Controller
@@ -76,6 +77,74 @@ class EventsController extends ApiController
         $this->_processUsers($users, $item->id);
         $this->apiResponse = $item;
     }
+  }
+
+  public function usersExcludeMembers($event_id, $type) {
+    $eventGroupTable = TableRegistry::get('EventsUsers');
+    $members = $eventGroupTable->find('all')->select(['user_id'])->where(['event_id' => $event_id])->toArray();
+    $members = Hash::extract($members, '{n}.user_id');
+    $userTable = TableRegistry::get('Users');
+    $where = [
+      'Users.fullname !=' => ''
+    ];
+    if ($type === 'all') {
+      //
+    } else {
+      array_push($where, array('Users.is_internal' => $type === 'internal' ? 1 : 0));
+    }
+    if ($members && count($members)) {
+      array_push($where, array('Users.id NOT IN' => $members));
+    }
+
+    $result = $userTable->find('all')->contain(['Avatar', 'Provinces', 'Districts', 'Jobs', 'Groups'])->where($where)->map(function ($row) { // map() is a collection method, it executes the query
+        $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
+        $row->job = $row->job ? $row->job['name'] : '';
+        $row->group = $row->group ? $row->group['name'] : '';
+        $row->province = $row->province ? $row->province['name'] : '';
+        $row->district = $row->district ? $row->district['name'] : '';
+        return $row;
+    })->toArray();
+    $this->apiResponse = $result;
+  }
+
+  public function pushMembers($event_id) {
+    $this->request->allowMethod('post');
+    $users = $this->request->data;
+    if ($users) {
+      $userEventTable = TableRegistry::get('EventsUsers');
+      //$userEventTable->deleteAll(['event_id' => $event_id]);
+      $data = [];
+      foreach ($users as $key => $value) {
+        $obj = [];
+        $obj['user_id'] = $value['id'];
+        $obj['event_id'] = $event_id;
+        array_push($data, $obj);
+
+        $item = $userEventTable->newEntity($obj);
+        if ($userEventTable->save($item)) {
+
+        }
+      }
+    }
+    $event = $this->Events->get($event_id, [
+      'contain' => [
+        'Users',
+        'Users.Avatar'
+      ]
+    ]);
+    $this->apiResponse['event'] = $event;
+  }
+
+  public function deleteMembers($user_id, $event_id) {
+    $userEventTable = TableRegistry::get('EventsUsers');
+    $userEventTable->deleteAll(['event_id' => $event_id, 'user_id' => $user_id]);
+    $event = $this->Events->get($event_id, [
+      'contain' => [
+        'Users',
+        'Users.Avatar'
+      ]
+    ]);
+    $this->apiResponse['event'] = $event;
   }
 
   private function _processUsers($users, $event_id) {

@@ -52,7 +52,7 @@ export class EventFormComponent implements OnInit {
       organizer: '',
       location: '',
       address: '',
-      users: '',
+      //users: '',
       start_date: ['', Validators.required],
       end_date: '',
       description: '',

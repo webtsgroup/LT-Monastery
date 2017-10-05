@@ -2,6 +2,10 @@
   "event": {
     "action": "Thao tác",
     "address": "Địa chỉ",
+    "choose_all": "Tất cả",
+    "choose_external": "Thành viên",
+    "choose_internal": "Tu sĩ",
+    "click_add": "Thêm",
     "date": "Thời gian",
     "description": "Mô tả thêm",
     "end_date": "Ngày kết thúc",

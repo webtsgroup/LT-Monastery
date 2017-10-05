@@ -19,10 +19,11 @@ class UsersController extends ApiController
         $this->request->allowMethod('get');
         $result = $this->Users->find('all')
         ->where(['is_internal' => $isInternal])
-        ->contain(['Avatar', 'Provinces', 'Districts', 'Jobs'])
+        ->contain(['Avatar', 'Provinces', 'Districts', 'Jobs', 'Groups'])
         ->map(function ($row) { // map() is a collection method, it executes the query
             $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
             $row->job = $row->job ? $row->job['name'] : '';
+            $row->group = $row->group ? $row->group['name'] : '';
             $row->province = $row->province ? $row->province['name'] : '';
             $row->district = $row->district ? $row->district['name'] : '';
             return $row;

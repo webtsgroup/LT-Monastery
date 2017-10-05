@@ -18,8 +18,8 @@
                   <div class="form-group">
                     <label for="name" class="col-md-3 control-label required">{{ 'administrator.role' | translate }}</label>
                     <div class="col-md-8">
-                      <div class="m-l-lg">
-                        <div class="radio" *ngFor="let item of metadata.roles">
+                      <div class="">
+                        <div class="radio radio-info" *ngFor="let item of metadata.roles">
                           <input type="radio" id="{{item.code}}" [value]="item.id" formControlName="role_id">
                           <label [attr.for]="item.code">{{item.name}}</label>
                         </div>

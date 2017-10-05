@@ -20,11 +20,22 @@
               <div class="m-b">
                 {{ detail?.description }}
               </div>
-              <button type="button" class="btn btn-default btn-sm  btn-add" (click)="showBox()" name="button">{{ 'group.click_add_members' | translate }}</button>
+              <div class="">
+                <span class="radio radio-inline radio-info" *ngFor="let item of ['all', 'internal', 'external']">
+                  <input type="radio" id="{{item}}" [value]="item" [(ngModel)]="type">
+                  <label [attr.for]="item">{{ 'event.choose_' + item | translate }}</label>
+                </span>
+                <button type="button" class="btn btn-default btn-sm btn-add m-l" (click)="showBox()" name="button">{{ 'event.click_add' | translate }}</button>
+              </div>
             </div>
             <div class="m-b">
               <ng-template [ngIf]="hasUsers">
-              <h2 class="m-b-xs">{{ 'group.users' | translate }}</h2>
+                <div class="row m-t m-b-xs">
+                  <div class="col-md-4">
+                    <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+                  </div>
+                </div>
+              <!-- <h2 class="m-b-xs">{{ 'group.users' | translate }}</h2> -->
               <p-dataTable #table
                            [value]="users"
                            [rows]="10"
@@ -104,6 +115,7 @@
               </p-column>
               </p-dataTable>
               <button style="margin-top: -60px; position: relative;" [disabled]="!selectedItems.length" type="button" class="btn btn-default btn-sm btn-add" (click)="addToGroup()" name="button">{{ 'group.add_members' | translate }}</button>
+              <button style="margin-top: -60px; position: relative;" type="button" class="btn btn-default btn-sm btn-cancel" (click)="closeBox()" name="button">Đóng</button>
               </ng-template>
             </div>
             <div class="hr-line-dashed"></div>

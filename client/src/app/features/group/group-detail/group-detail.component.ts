@@ -18,6 +18,7 @@ export class GroupDetailComponent implements OnInit {
   cols: any;
   columnOptions: any;
   metadata: any;
+  type: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,7 @@ export class GroupDetailComponent implements OnInit {
     this.isInit = true;
     this.selectedItems = [];
     this.metadata = {};
+    this.type = 'all';
   }
 
   ngOnInit() {
@@ -75,6 +77,11 @@ export class GroupDetailComponent implements OnInit {
     this.fetchUsers();
   }
 
+  closeBox() {
+    this.selectedItems = [];
+    this.hasUsers = false;
+  }
+
   addToGroup() {
     this.api.post(['groups', 'pushMembers', this.itemId], this.selectedItems).subscribe(
       (data: any) => {
@@ -91,7 +98,7 @@ export class GroupDetailComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.api.get(['groups', 'usersExcludeMembers', this.itemId]).subscribe(
+    this.api.get(['groups', 'usersExcludeMembers', this.itemId, this.type]).subscribe(
       (data: any) => {
         this.users = data.result || [];
       }, (err) => {
