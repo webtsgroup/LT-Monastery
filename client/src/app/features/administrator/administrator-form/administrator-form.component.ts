@@ -18,6 +18,7 @@ export class AdministratorFormComponent implements OnInit {
   uploadedFiles: any;
   form: FormGroup;
   itemId: number;
+  canChangePass: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class AdministratorFormComponent implements OnInit {
       }
     };
     this.uploadedFiles = [];
+    this.canChangePass = false;
   }
 
   ngOnInit() {
@@ -53,7 +55,7 @@ export class AdministratorFormComponent implements OnInit {
   		username: ['', Validators.required],
       fullname: ['', Validators.required],
       password: ['', Validators.required],
-      //repassword: ['', Validators.required],
+      //re_password: ['', Validators.required],
       role_id: ['', Validators.compose([
           Validators.required,
           CustomValidators.digits
@@ -137,7 +139,20 @@ export class AdministratorFormComponent implements OnInit {
     for(let file of e.files) {
       this.uploadedFiles.push(file);
     }
-  }OnInit() {
+  }
+
+  showBox() {
+    this.canChangePass = true;
+    this.form.controls['password'].setValidators([Validators.required]);
+    //this.form.registerControl('password', new FormControl(['', Validators.required]));
+    this.form.controls['password'].updateValueAndValidity();
+  }
+
+  hideBox() {
+    this.canChangePass = false;
+    //this.form.controls['password'].setValidators([]);
+    this.form.setControl('password', new FormControl());
+    this.form.controls['password'].updateValueAndValidity();
   }
 
 }

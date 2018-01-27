@@ -1,5 +1,7 @@
 {
   "administrator": {
+    "change_password": "Đổi mật khẩu",
+    "error_password": "Mật khẩu không đúng",
     "fullname": "Tên hiển thị",
     "password": "Mật khẩu",
     "role": "Quyền",
