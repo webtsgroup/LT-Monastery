@@ -50,15 +50,15 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.initForm();
+      this.userType = params.slug;
       if (params.id) {
         this.itemId = +params.id;
         this.urlUpload['image'] += `/${this.itemId}`;
         this.urlUpload['avatar'] += `/${this.itemId}`;
         this.fetchData();
       } else {
-        this.getMetadata();
+        this.getMetadata(this.userType);
       }
-      this.userType = params.slug;
     });
   }
 
@@ -93,8 +93,9 @@ export class UserFormComponent implements OnInit {
   	});
   }
 
-  getMetadata() {
-    this.api.get(['users', 'getMetadata']).subscribe(
+  getMetadata(type: string) {
+    console.log(type);
+    this.api.get(['users', 'getMetadata', type]).subscribe(
       (data: any) => {
         this.metadata.provinces = data.result.provinces || [];
         this.metadata.provinces.filter((obj: any) => {
