@@ -66,8 +66,12 @@ export class UserFormComponent implements OnInit {
   	this.form = this.fb.group({
   		fullname: ['', Validators.required],
       code: ['', Validators.required],
-      phone: '',
-      email: '',
+      phone: ['', Validators.compose([
+        Validators.maxLength(20),
+      ])],
+      email: ['', Validators.compose([
+        CustomValidators.email
+      ])],
       facebook: '',
       nickname: '',
       birthday: '',

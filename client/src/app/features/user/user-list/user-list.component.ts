@@ -33,7 +33,7 @@ export class UserListComponent implements OnInit {
   ngOnInit() {
     this.cols = [
       { field: 'barcode', header: 'Barcode' },
-      { field: 'phone', header: 'SDT' },
+      { field: 'phone', header: 'SĐT' },
       { field: 'email', header: 'Email' },
       { field: 'facebook', header: 'Facebook' },
       //{ field: 'group', header: 'Nhóm' },
@@ -53,6 +53,7 @@ export class UserListComponent implements OnInit {
       return !hiddenField.includes(obj.field);
     });
     this.route.params.subscribe(params => {
+      this.isInit = true;
       if (params.slug) {
         this.userType = params.slug;
         this.fetchData();

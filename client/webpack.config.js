@@ -479,7 +479,8 @@ module.exports = {
         "environments/environment.ts": "environments/environment" + env() + ".ts"
       },
       "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json"
+      "tsConfigPath": "src/tsconfig.app.json",
+      "skipCodeGeneration": true
     })
   ],
   "node": {

@@ -14,7 +14,13 @@
           <div class="ibox-content">
             <div class="row m-b">
               <div class="col-md-2">
-                <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+                <p-multiSelect [options]="columnOptions" [(ngModel)]="cols">
+                  <ng-template let-car let-i="index" pTemplate="item">
+                      {{i}}
+                      <img src="assets/showcase/images/demo/car/{{car.label}}.png" style="width:24px;display:inline-block;vertical-align:middle"/>
+                      <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+                  </ng-template>
+                </p-multiSelect>
                 <input #search type="text" pInputText placeholder="{{ 'user.filter_by_name' | translate }}" class="form-control hidden">
               </div>
               <div class="col-md-10 text-right">
@@ -75,7 +81,7 @@
           <!-- <p-column field="barcode" header="{{'user.barcode' | translate}}" [filter]="true" [sortable]="true"></p-column>
           <p-column field="phone" header="{{'user.phone' | translate}}" [filter]="true" [sortable]="true"></p-column>
           <p-column field="email" header="{{'user.email' | translate}}" [filter]="true" [sortable]="true"></p-column> -->
-          <p-column *ngFor="let col of cols" styleClass="{{col.field}}" [field]="col.field" [header]="col.header" [filter]="true" filterMatchMode="contains" [sortable]="true">
+          <p-column *ngFor="let col of cols" styleClass="{{col.field}}" [field]="col.field" [header]="( 'user.' + col.field | translate )" [filter]="true" filterMatchMode="contains" [sortable]="true">
             <ng-template [ngIf]="col.field === 'facebook'">
               <ng-template let-item="rowData" pTemplate="body">
                 <a href="{{item?.facebook}}" target="_blank">{{item?.facebook}}</a>
