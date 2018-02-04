@@ -1,0 +1,15 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <app-breadcrumb></app-breadcrumb>
+  <!-- <div class="col-sm-4">
+    <div class="title-action">
+      <a routerLink="" class="btn btn-white btn-sm">This is action area</a>
+    </div>
+  </div> -->
+</div>
+<div [loading]="isInitialing" class="wrapper wrapper-content">
+  <ng-template [ngIf]="!isInitialing">
+    <div class="row">
+      
+    </div>
+  </ng-template>
+</div>

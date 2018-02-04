@@ -48,6 +48,10 @@ true}">
 true}">
         <a [routerLink]="['/administrators']"><i class="fa fa-unlock"></i> <span class="nav-label">{{ 'nav.administrators.module' | translate }}</span></a>
       </li>
+      <li [permission]="['jobs', 'view']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+        true}">
+        <a [routerLink]="['/jobs']"><i class="fa fa-unlock"></i> <span class="nav-label">{{ 'nav.jobs.module' | translate }}</span></a>
+      </li>
     </ul>
   </div>
 </nav>
