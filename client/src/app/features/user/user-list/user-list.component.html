@@ -82,6 +82,11 @@
           <p-column field="phone" header="{{'user.phone' | translate}}" [filter]="true" [sortable]="true"></p-column>
           <p-column field="email" header="{{'user.email' | translate}}" [filter]="true" [sortable]="true"></p-column> -->
           <p-column *ngFor="let col of cols" styleClass="{{col.field}}" [field]="col.field" [header]="( 'user.' + col.field | translate )" [filter]="true" filterMatchMode="contains" [sortable]="true">
+            <ng-template [ngIf]="col.field === 'job'">
+                <ng-template let-item="rowData" pTemplate="header">
+                  {{ 'user.job_' + userType | translate  }}
+                </ng-template>
+              </ng-template>
             <ng-template [ngIf]="col.field === 'facebook'">
               <ng-template let-item="rowData" pTemplate="body">
                 <a href="{{item?.facebook}}" target="_blank">{{item?.facebook}}</a>

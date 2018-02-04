@@ -119,7 +119,7 @@ export class UserFormComponent implements OnInit {
   }
 
   fetchData() {
-    this.api.get(['users', 'view', this.itemId, 1]).subscribe(
+    this.api.get(['users', 'view', this.itemId, 1, this.userType]).subscribe(
       (data: any) => {
         this.metadata.user = data.result.user || {};
         this.metadata.provinces = data.result.provinces || [];

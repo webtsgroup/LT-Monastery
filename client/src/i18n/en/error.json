@@ -1,0 +1,10 @@
+{
+    "error": {
+        "form": {
+            "require": "Vui lòng nhập dữ liệu.",
+            "maxlength": "Tối đa {{number}} kí tự.",
+            "minlength": "Tối thiểu {{number}} kí tự.",
+            "email": "Vui lòng nhập đúng định dạng email."
+        }
+    }
+}

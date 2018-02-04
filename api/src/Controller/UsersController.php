@@ -18,7 +18,7 @@ class UsersController extends ApiController
         $isInternal = $type === 'internal' ? 1 : 0;
         $this->request->allowMethod('get');
         $result = $this->Users->find('all')
-        ->where(['is_internal' => $isInternal])
+        ->where(['Users.is_internal' => $isInternal])
         ->contain(['Avatar', 'Provinces', 'Districts', 'Jobs', 'Groups'])
         ->map(function ($row) { // map() is a collection method, it executes the query
             $row->birthday = $row->birthday ? date('d/m/Y', $row->birthday) : '';
@@ -30,10 +30,10 @@ class UsersController extends ApiController
         })->toArray();
         //debug($this->Users->find('all')->contain(['Events']));
         $this->apiResponse['users'] = $result;
-        $this->getMetadata();
+        $this->getMetadata($isInternal);
     }
 
-    public function view($id, $pageUpdate = 0)
+    public function view($id, $pageUpdate = 0, $type = 'internal')
     {
         $this->request->allowMethod('get');
         $user = $this->Users->get($id,  [
@@ -48,20 +48,21 @@ class UsersController extends ApiController
             ]
         ]);
         if ($pageUpdate == 1) {
-          $this->getMetadata();
+          $this->getMetadata($type);
         }
         $user = $this->_parseData($user);
         $this->apiResponse['user'] = $user;
     }
 
-    public function getMetadata()
+    public function getMetadata($type = 'internal')
     {
+      $isInternal = ($type === 'internal' || $type === 1) ? 1 : 0;
       $provinceTable = TableRegistry::get('Provinces');
       $provinces = $provinceTable->find('all')->toArray();
       $this->apiResponse['provinces'] = $provinces;
 
       $jobTable = TableRegistry::get('Jobs');
-      $jobs = $jobTable->find('all')->toArray();
+      $jobs = $jobTable->find('all')->where(['Jobs.is_internal' => $isInternal])->toArray();
       $this->apiResponse['jobs'] = $jobs;
 
       $groupTable = TableRegistry::get('Groups');
@@ -77,6 +78,10 @@ class UsersController extends ApiController
     {
       $this->request->allowMethod('post');
       $_data = $this->request->data;
+      // debug($_data['fullname']);
+      if ($_data['fullname']) {
+        $_data['fullname'] = mb_strtoupper($_data['fullname'], 'UTF-8');
+      }
       if ($_data['birthday']) {
         $_data['birthday'] = strtotime($this->_formatDate($_data['birthday']));
       }
@@ -90,6 +95,9 @@ class UsersController extends ApiController
     {
       $this->request->allowMethod('post');
       $_data = $this->request->data;
+      if ($_data['fullname']) {
+        $_data['fullname'] = mb_strtoupper($_data['fullname'], 'UTF-8');
+      }
       if ($_data['birthday']) {
         $_data['birthday'] = strtotime($this->_formatDate($_data['birthday']));
       }

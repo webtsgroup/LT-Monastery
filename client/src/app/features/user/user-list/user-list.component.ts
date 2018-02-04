@@ -31,33 +31,34 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cols = [
-      { field: 'barcode', header: 'Barcode' },
-      { field: 'phone', header: 'SĐT' },
-      { field: 'email', header: 'Email' },
-      { field: 'facebook', header: 'Facebook' },
-      //{ field: 'group', header: 'Nhóm' },
-      { field: 'province', header: 'Tỉnh/TP' },
-      { field: 'district', header: 'Quận/Huyện' },
-      { field: 'address', header: 'Địa chỉ' },
-      { field: 'birthday', header: 'Ngày sinh' },
-      { field: 'job', header: 'Nghề nghiệp' }
-    ];
-
-    this.columnOptions = [];
-    for(let i = 0; i < this.cols.length; i++) {
-      this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
-    }
-    const hiddenField = ['facebook', 'province', 'district', 'address'];
-    this.cols = this.cols.filter((obj: any) => {
-      return !hiddenField.includes(obj.field);
-    });
+    
     this.route.params.subscribe(params => {
       this.isInit = true;
+      this.userType = params.slug;
       if (params.slug) {
-        this.userType = params.slug;
         this.fetchData();
       }
+      this.cols = [
+        { field: 'barcode', header: 'Barcode' },
+        { field: 'phone', header: 'SĐT' },
+        { field: 'email', header: 'Email' },
+        { field: 'facebook', header: 'Facebook' },
+        //{ field: 'group', header: 'Nhóm' },
+        { field: 'province', header: 'Tỉnh/TP' },
+        { field: 'district', header: 'Quận/Huyện' },
+        { field: 'address', header: 'Địa chỉ' },
+        { field: 'birthday', header: 'Ngày sinh' },
+        { field: 'job', header: 'Nghề nghiệp' }
+      ];
+  
+      this.columnOptions = [];
+      for(let i = 0; i < this.cols.length; i++) {
+        this.columnOptions.push({label: this.cols[i].header, value: this.cols[i]});
+      }
+      const hiddenField = ['facebook', 'province', 'district', 'address'];
+      this.cols = this.cols.filter((obj: any) => {
+        return !hiddenField.includes(obj.field);
+      });
     });
   }
 
