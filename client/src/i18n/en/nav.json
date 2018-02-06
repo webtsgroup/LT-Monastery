@@ -26,6 +26,10 @@
       "new": "Thêm Nhóm",
       "update": "Thay đổi thông tin"
     },
+    "jobs": {
+      "management": "Giới phẩm/Nghề nghiệp",
+      "module": "Giới phẩm/Nghề nghiệp"
+    },
     "users": {
       "internal": {
         "detail": "Thông tin Tu sĩ",

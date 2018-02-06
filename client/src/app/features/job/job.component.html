@@ -1,15 +1,77 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <app-breadcrumb></app-breadcrumb>
-  <!-- <div class="col-sm-4">
+  <div class="col-sm-4">
     <div class="title-action">
-      <a routerLink="" class="btn btn-white btn-sm">This is action area</a>
+      <button class="btn btn-sm btn-default" (click)="showDialog()">{{ 'nav.jobs.new' | translate }}</button>
     </div>
-  </div> -->
+  </div>
 </div>
 <div [loading]="isInitialing" class="wrapper wrapper-content">
   <ng-template [ngIf]="!isInitialing">
     <div class="row">
-      
+      <div class="col-md-12">
+        <div class="ibox">
+          <div class="ibox-content">
+            <!-- <div class="row m-b">
+              <div class="col-md-4">
+                <input #search type="text" pInputText placeholder="{{ 'job.filter_by_name' | translate }}" class="form-control">
+              </div>
+              <div class="col-md-5 m-b pull-right">
+                <button class="btn btn-sm btn-default btn-delete" [disabled]="!selectedItems.length">{{ 'action.delete' | translate }}</button>
+              </div>
+            </div> -->
+            <p-dataTable #table
+                          [value]="result"
+                          [rows]="20"
+                          [paginator]="true"
+                          [editable]="true"
+                          [globalFilter]="search"
+                          [(selection)]="selectedItems"
+                          scrollable="true"
+                          sortMode="multiple">
+              <!-- <p-column styleClass="col-cb" selectionMode="multiple"></p-column> -->
+              <p-column styleClass="col-sysid" field="id" header="{{ 'sysid' | translate }}" [sortable]="true">
+              </p-column>
+              <p-column field="name" header="{{'job.name' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  {{item.name}}
+                </ng-template>
+              </p-column>
+
+              <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'job.action' | translate }}">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                  <button class="update" (click)="showDialog(item)"></button>
+                  <button (click)="showDialog(item)" class="delete"></button>
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+          </div>
+        </div>
+      </div>
     </div>
   </ng-template>
 </div>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="{{ 'job.detail' | translate }}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="425">
+    <div class="ui-grid ui-grid-responsive ui-fluid form-horizontal">
+        <div class="row">
+            <div class="col-md-4"><label for="vin">{{ 'job.name' | translate }}</label></div>
+            <div class="col-md-8"><input class="form-control" [(ngModel)]="itemDetail.name" /></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"><label for="vin">{{ 'job.type' | translate }}</label></div>
+            <div class="col-md-8">
+                <div class="radio radio-info" *ngFor="let item of type">
+                  <input type="radio" id="{{item.code}}" [value]="item.value" [(ngModel)]="itemDetail.is_internal">
+                  <label [attr.for]="item.code">{{ 'job.' + item.code | translate }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix m-t-sm">
+          <button *ngIf="itemDetail.id" type="button" [disabled]="isProcessing" pButton icon="fa-check" (click)="onSubmit()" label="{{ 'action.save' | translate }}"></button>
+            <button *ngIf="itemDetail.id" type="button" pButton icon="fa-close" (click)="delete(itemDetail.id)" label="{{ 'action.delete' | translate }}"></button>
+        </div>
+    </p-footer>
+</p-dialog>

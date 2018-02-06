@@ -1,0 +1,10 @@
+{
+  "job": {
+    "action": "Hành động",
+    "detail": "Giới phẩm/Nghề nghiệp",
+    "external": "Nghề nghiệp",
+    "internal": "Giới phẩm",
+    "name": "Tên",
+    "type": "Phân loại"
+  }
+}
