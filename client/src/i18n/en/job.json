@@ -5,6 +5,7 @@
     "external": "Nghề nghiệp",
     "internal": "Giới phẩm",
     "name": "Tên",
+    "not_set": "-",
     "type": "Phân loại"
   }
 }

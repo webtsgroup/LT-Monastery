@@ -37,7 +37,11 @@
                   {{item.name}}
                 </ng-template>
               </p-column>
-
+              <p-column field="name" header="{{'job.type' | translate}}" [sortable]="true">
+                <ng-template let-col let-item="rowData" pTemplate="body">
+                    {{ 'job.' + item.type | translate }}
+                </ng-template>
+              </p-column>
               <p-column field="id" styleClass="col-md-1 col-action text-right" header="{{ 'job.action' | translate }}">
                 <ng-template let-col let-item="rowData" pTemplate="body">
                   <button class="update" (click)="showDialog(item)"></button>

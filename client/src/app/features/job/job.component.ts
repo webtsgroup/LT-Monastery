@@ -43,7 +43,17 @@ export class JobComponent implements OnInit {
   fetchData() {
     this.api.get(['jobs', 'index']).subscribe(
       (data: any) => {
-        this.result = data.result || {};
+        this.result = data.result || [];
+        this.result.map((item: any) => {
+          if (item.is_internal === 1) {
+            item.type = 'internal';
+          } else if (item.is_internal === 0) {
+            item.type = 'external';
+          } else {
+            item.type = 'not_set';
+          }
+          return item
+        });
       },(err: any) => {
         this.isInitialing = false;
       }, () => {
@@ -90,6 +100,16 @@ export class JobComponent implements OnInit {
         this.api.get(['jobs', 'delete', id]).subscribe(
           (data: any) => {
             this.result = data.result || [];
+            this.result.map((item: any) => {
+              if (item.is_internal === 1) {
+                item.type = 'internal';
+              } else if (item.is_internal === 0) {
+                item.type = 'external';
+              } else {
+                item.type = 'not_set';
+              }
+              return item
+            });
           }, (err) => {
             this.displayDialog = false;
             this.isProcessing = false;
